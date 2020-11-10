@@ -1,9 +1,14 @@
 import React from 'react'
-function App() {
+import {Navbar} from "./client/components/index"
+// import Routes from "./routes"
+
+const App = () => {
   return (
-    <>
-      <h1> Hello, World </h1>
-    </>
+    <div>
+      <Navbar/>
+      {/* <Routes/> */}
+      
+    </div>
   );
 }
 
