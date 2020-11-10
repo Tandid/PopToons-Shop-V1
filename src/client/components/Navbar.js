@@ -10,7 +10,10 @@ class Navbar extends React.Component {
         return (
             <div>
                 <nav>
-                <NavLink to="/"> FunkoPop </NavLink>
+                <NavLink to="/"> Home Page </NavLink>
+                <NavLink to="/products"> Products </NavLink>
+                <NavLink to="/cart"> Cart # </NavLink>
+                <NavLink to="/orders"> Order History </NavLink>
                 </nav>
             </div>
         )
