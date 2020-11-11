@@ -2,6 +2,7 @@ import React from 'react'
 import {Link, NavLink} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Tab from "@material-ui/core/Tab";
@@ -23,6 +24,8 @@ const Navbar = () => {
 
     return (
         <ThemeProvider theme={theme}>
+                      <CssBaseline/>
+
             <AppBar style={{ margin: 0 }} position="static">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6">
