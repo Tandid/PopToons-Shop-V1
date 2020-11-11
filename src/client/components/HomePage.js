@@ -54,19 +54,19 @@ const HomePage = () => {
             <ThemeProvider theme={theme}>
             <CssBaseline />
             <Grid container justify="center" className={classes.root}>
-            <Paper className={classes.banner} style={{backgroundImage: 'url(https://www.bemoregeek.co.uk/content/images/carousels/bmg-web-banners5-9927.jpg)'}}/>
-            <Button className={classes.button} variant="contained" color="primary">
+            <Paper className={classes.banner} style={{backgroundImage: 'url(images/funko_banner.jpg)'}}/>
+            {/* <Button className={classes.button} variant="contained" color="primary">
             SHOP NOW
-            </Button>
+            </Button> */}
             <Grid container justify="center">
-            <Paper className={classes.largePost} style={{backgroundImage: 'url(https://cdn10.bigcommerce.com/s-6r10lz/product_images/uploaded_images/pop-dbz-banner.jpg?t=1488346408)'}}/>
-            <Paper className={classes.miniPost} style={{backgroundImage: 'url(https://www.tierragamer.com/wp-content/uploads/2020/09/Dragon-Ball-Z-Nuevos-Funko-Pop-01.jpg)'}}/>
+            <Paper className={classes.largePost} style={{backgroundImage: 'url(images/pop_dbz_banner.jpg)'}}/>
+            <Paper className={classes.miniPost} style={{backgroundImage: 'url(images/dbz_funko_pops.jpg)'}}/>
             </Grid>
             <Grid container justify="space-around">
-            <Paper className={classes.miniPost} style={{backgroundImage: 'url(https://photos-us.bazaarvoice.com/photo/2/cGhvdG86Z2FtZXN0b3A/eaadf1af-a29a-5d69-9e31-692532e0f628)'}}/>
-            <Paper className={classes.miniPost} style={{backgroundImage: 'url(https://media.comicbook.com/2018/11/funko-thor-vs-thanos-1143282.jpeg)'}}/>
+            <Paper className={classes.miniPost} style={{backgroundImage: 'url(images/naruto_vs_sasuke.jpg)'}}/>
+            <Paper className={classes.miniPost} style={{backgroundImage: 'url(images/thor_vs_thanos.jpg)'}}/>
             </Grid>
-            <Paper className={classes.banner} style={{backgroundImage: 'url(https://cdn2.bigcommerce.com/server500/d90a4/product_images/theme_images/funkopop-sf-banner__89066.jpg?t=1482074497)'}}/>
+            <Paper className={classes.banner} style={{backgroundImage: 'url(images/streetfighter_banner.jpg)'}}/>
             </Grid>
             <Footer title="Contact" description="Check out my portfolio here!" />
             </ThemeProvider>
