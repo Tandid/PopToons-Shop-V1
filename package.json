@@ -15,6 +15,7 @@
     "express-session": "^1.17.1",
     "morgan": "^1.10.0",
     "node": "^15.2.0",
+    "nodemon": "^2.0.6",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
     "pg": "^8.5.0",
@@ -36,7 +37,6 @@
     "start-dev": "nodemon ./server/index.js & react-scripts start",
     "dev": "nodemon ./server/index.js",
     "seed": "node script/seed.js"
-
   },
   "eslintConfig": {
     "extends": [
@@ -56,21 +56,5 @@
       "last 1 safari version"
     ]
   },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.js",
-  "devDependencies": {
-    "nodemon": "^2.0.6"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Tandid/funkopop-shop.git"
-  },
-  "keywords": [],
-  "author": "Tandid Alam",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Tandid/funkopop-shop/issues"
-  },
-  "homepage": "https://github.com/Tandid/funkopop-shop#readme",
   "proxy": "http://localhost:8080"
 }
