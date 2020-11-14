@@ -1,6 +1,5 @@
+const { url } = require("inspector");
 const db = require("../server/db");
-const { User } = require("../server/db/models");
-
 const { User, Product, OrderItems, Order } = require("../server/db/models");
 
 async function seed() {
@@ -24,11 +23,79 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({
-      title: "",
+      title: "Aang",
+      description: "POP! Avatar the Last Airbender",
+      imageURL: "url(images/product_images/aang.png)",
+      price: 15.0,
+    }),
+    Product.create({
+      title: "Axel",
+      description: "POP! Kingdom Hearts",
+      imageURL: "url(images/product_images/axel.png)",
+      price: 15.0,
+    }),
+    Product.create({
+      title: "Boruto",
+      description: "POP! Boruto: Next Generations",
+      imageURL: "url(images/product_images/boruto.png)",
+      price: 15.0,
+    }),
+    Product.create({
+      title: "Broly",
+      description: "POP! Dragon Ball Z",
+      imageURL: "url(images/product_images/broly.png)",
+      price: 15.0,
+    }),
+    Product.create({
+      title: "Captain America",
+      description: "POP! Marvel Avengers",
+      imageURL: "url(images/product_images/captain_america.png)",
+      price: 15.0,
+    }),
+    Product.create({
+      title: "Crash",
+      description: "POP! Crash Bandicoot",
+      imageURL: "url(images/product_images/crash_bandicoot.png)",
+      price: 15.0,
+    }),
+    Product.create({
+      title: "Dabi",
+      description: "POP! My Hero Academia",
+      imageURL: "url(images/product_images/dabi.png)",
+      price: 15.0,
+    }),
+    Product.create({
+      title: "Dwight Schrute",
+      description: "POP! The Office",
+      imageURL: "url(images/product_images/dwight.png)",
+      price: 15.0,
+    }),
+    Product.create({
+      title: "Gaara",
+      description: "POP! Naruto Shippuden",
+      imageURL: "url(images/product_images/gaara.png)",
+      price: 15.0,
+    }),
+    Product.create({
+      title: "Gohan",
+      description: "POP! Dragon Ball Z",
+      imageURL: "url(images/product_images/gohan.png)",
+      price: 15.0,
+    }),
+    Product.create({
+      title: "Goku Ultra Instinct Form",
+      description: "POP! Dragon Ball Super",
+      imageURL: "url(images/product_images/goku_ultra.png)",
+      price: 15.0,
     }),
   ]);
 
-  const [products] = await console.log(`seeded ${users.length} users`);
+  const [a, b, c, d, e, f, g, h, i, j] = products;
+
+  //--------------------------------------------------------
+
+  console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${products.length} products`);
   console.log(`seeded successfully`);
 }
 
