@@ -1,12 +1,23 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const {v4: uuidv4} = require('uuid')
 
 const User = db.define('user', {
+  id: {
+    type: Sequelize.UUID,
+    primaryKey: true,
+    defaultValue: uuidv4
+  },
   email: {
     type: Sequelize.STRING,
-    unique: true,
-    allowNull: false
+    // unique: true,
+    // allowNull: false,
+    validate: {
+      isEmail: {
+        msg: 'Please enter a valid email address'
+      }
+    }
   },
   password: {
     type: Sequelize.STRING,
@@ -14,6 +25,12 @@ const User = db.define('user', {
     // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
       return () => this.getDataValue('password')
+    },
+    validate: {
+      len: {
+        args: [3],
+        msg: 'Password must be at least 3 characters'
+      }
     }
   },
   salt: {
@@ -26,6 +43,31 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  },
+
+  admin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+
+  firstName: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
+
+  lastName: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
+
+  address: {
+    type: Sequelize.STRING
+  },
+
+  imageURL: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: 'https://img.icons8.com/cotton/2x/controller.png'
   }
 })
 
