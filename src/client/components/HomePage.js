@@ -30,10 +30,13 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0),
     marginTop: theme.spacing(2),
   },
+  center: {
+    display: "flex",
+    justifyContent: "center",
+  },
   banner: {
-    width: theme.spacing(170),
-    height: theme.spacing(50),
-    marginBottom: theme.spacing(4),
+    height: theme.spacing(60),
+    margin: theme.spacing(3),
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
@@ -68,29 +71,29 @@ const HomePage = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <AutoPlaySwipeableViews
+        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+        index={activeStep}
+        onChangeIndex={handleStepChange}
+        enableMouseEvents
+      >
+        {tutorialSteps.map((step, index) => (
+          <div className={classes.center} key={step.label}>
+            {Math.abs(activeStep - index) <= 2 ? (
+              <img
+                className={classes.banner}
+                src={step.imgPath}
+                alt={step.label}
+              />
+            ) : null}
+          </div>
+        ))}
+      </AutoPlaySwipeableViews>
       <Grid container justify="center" className={classes.root}>
-        <AutoPlaySwipeableViews
-          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          index={activeStep}
-          onChangeIndex={handleStepChange}
-          enableMouseEvents
-        >
-          {tutorialSteps.map((step, index) => (
-            <div key={step.label}>
-              {Math.abs(activeStep - index) <= 2 ? (
-                <img
-                  className={classes.banner}
-                  src={step.imgPath}
-                  alt={step.label}
-                />
-              ) : null}
-            </div>
-          ))}
-        </AutoPlaySwipeableViews>
-        <Paper
+        {/* <Paper
           className={classes.banner}
           style={{ backgroundImage: "url(images/funko_banner.jpg)" }}
-        />
+        /> */}
         {/* <Button className={classes.button} variant="contained" color="primary">
             SHOP NOW
             </Button> */}
@@ -114,10 +117,10 @@ const HomePage = () => {
             style={{ backgroundImage: "url(images/thor_vs_thanos.jpg)" }}
           />
         </Grid>
-        <Paper
+        {/* <Paper
           className={classes.banner}
           style={{ backgroundImage: "url(images/streetfighter_banner.jpg)" }}
-        />
+        /> */}
       </Grid>
       <Footer title="Contact" description="Check out my portfolio here!" />
     </ThemeProvider>
