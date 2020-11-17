@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
@@ -60,8 +62,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HomePage = () => {
+const HomePage = (props) => {
   const classes = useStyles();
+  const { email } = props;
 
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -129,4 +132,10 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+const mapState = (state) => {
+  return {
+    email: state.user.email,
+  };
+};
+
+export default connect(mapState)(HomePage);

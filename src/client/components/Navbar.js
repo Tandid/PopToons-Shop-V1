@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+import { logout } from "../store";
+
 import { Link, NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Navbar = () => {
+const Navbar = ({ handleClick, isLoggedIn }) => {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -121,4 +124,18 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapState = (state) => {
+  return {
+    isLoggedIn: !!state.user.id,
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    handleClick() {
+      dispatch(logout());
+    },
+  };
+};
+
+export default connect(mapState, mapDispatch)(Navbar);
