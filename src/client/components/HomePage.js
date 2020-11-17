@@ -18,10 +18,11 @@ const tutorialSteps = [
     imgPath: "images/funko_banner.jpg",
   },
   {
-    imgPath: "images/funko_banner.jpg",
+    imgPath: "images/funko.jpg",
   },
+
   {
-    imgPath: "images/funko_banner.jpg",
+    imgPath: "images/one_piece.jpg",
   },
 ];
 
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   banner: {
+    width: theme.spacing(170),
     height: theme.spacing(60),
     margin: theme.spacing(3),
     backgroundSize: "cover",
@@ -97,7 +99,7 @@ const HomePage = () => {
         {/* <Button className={classes.button} variant="contained" color="primary">
             SHOP NOW
             </Button> */}
-        <Grid container justify="center">
+        {/* <Grid container justify="center">
           <Paper
             className={classes.largePost}
             style={{ backgroundImage: "url(images/pop_dbz_banner.jpg)" }}
@@ -106,15 +108,15 @@ const HomePage = () => {
             className={classes.miniPost}
             style={{ backgroundImage: "url(images/dbz_funko_pops.jpg)" }}
           />
-        </Grid>
+        </Grid> */}
         <Grid container justify="space-around">
           <Paper
             className={classes.miniPost}
-            style={{ backgroundImage: "url(images/naruto_vs_sasuke.jpg)" }}
+            style={{ backgroundImage: "url(images/civil_war.jpg)" }}
           />
           <Paper
             className={classes.miniPost}
-            style={{ backgroundImage: "url(images/thor_vs_thanos.jpg)" }}
+            style={{ backgroundImage: "url(images/star_wars.jpg)" }}
           />
         </Grid>
         {/* <Paper
