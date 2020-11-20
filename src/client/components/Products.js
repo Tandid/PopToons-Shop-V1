@@ -22,7 +22,7 @@ class Products extends React.Component {
     return (
       <div>
         <div>
-          <ul>
+          <ul className="card-wrapper">
             {products.map((product) => {
               return <ProductCard key={product.id} {...product} />;
             })}

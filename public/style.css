@@ -1,3 +1,21 @@
 body {
   margin: 0;
 }
+
+.card-wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 25%;
+  text-align: center;
+  border-radius: 1rem;
+  margin: 0.5rem;
+}
+
+img {
+  height: 250px;
+  width: 200px;
+}

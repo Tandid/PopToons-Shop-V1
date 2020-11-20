@@ -2,27 +2,49 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-class ProductCard extends React.Component {
-  constructor() {
-    super();
-  }
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 
-  render() {
-    const { id, title, imageURL, price } = this.props;
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "23%",
+    textAlign: "center",
+    padding: theme.spacing(2),
+    margin: theme.spacing(1),
+  },
+  media: {
+    height: 0,
+    paddingTop: "80%",
+    backgroundSize: "contain",
+    backgroundPosition: "center",
+    "&:hover": {
+      transform: "scale(1.1)",
+    },
+  },
+}));
 
-    return (
-      <li key={id}>
-        <h4>{title}</h4>
-        <br />
-        <img src={imageURL} />
-        <p>${price}</p>
-        <Link to={`/products/${id}`} className="productLink">
-          More Details
-        </Link>
-      </li>
-    );
-  }
-}
+const ProductCard = ({ id, title, imageURL, description, price }) => {
+  const classes = useStyles();
+
+  return (
+    <Card key={id} className={classes.root}>
+      <CardMedia className={classes.media} image={imageURL} title={title} />
+      <CardHeader title={title} subheader={description} />
+      <CardContent>
+        <Typography variant="body2" component="p">
+          ${price}.00
+          <Link to={`/products/${id}`} className="productLink">
+            More Details
+          </Link>
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+};
 
 const mapStateToProps = ({ user }) => {
   return {
