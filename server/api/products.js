@@ -7,4 +7,26 @@ router.get("/", async (req, res, next) => {
     .catch(next);
 });
 
+router.get("/:id", async (req, res, next) => {
+  await Product.findByPk(req.params.id)
+    .then((product) => res.send(product))
+    .catch(next);
+});
+
+router.post("/", async (req, res, next) => {
+  await Product.create(req.body)
+    .then((product) => res.send(product))
+    .catch(next);
+});
+
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.id);
+    await product.destroy();
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

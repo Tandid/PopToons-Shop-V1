@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
 import { HomePage, Products, Cart, Orders } from "./client/components/index";
 // import { Login, Signup, UserHome } from "./components";
-import { me } from "./client/store";
+import { me, getProducts } from "./client/store";
 
 class Routes extends Component {
   constructor() {
@@ -20,7 +20,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={HomePage} />
-        <Route path="/products" component={Products} />
+        <Route exact path="/products" component={Products} />
         <Route path="/cart" component={Cart} />
         <Route path="/orders" component={Orders} />
       </Switch>
@@ -31,6 +31,7 @@ class Routes extends Component {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
+    products: state.products,
   };
 };
 
@@ -38,6 +39,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());
+      dispatch(getProducts());
     },
   };
 };
