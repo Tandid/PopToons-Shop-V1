@@ -6,11 +6,9 @@ const Theme = createMuiTheme({
       main: "#DC143C", //crimson
     },
     secondary: {
-      main: "#FFFFFF",
+      main: "#87CEEB",
     },
-    white: "white",
-    black: "black",
-    blue: "blue",
+    common: { white: "#FFF", black: "#000" },
   },
   status: {},
   overrides: {},

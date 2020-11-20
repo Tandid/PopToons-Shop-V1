@@ -9,12 +9,14 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { ThemeProvider } from "@material-ui/styles";
+import theme from "../theme";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "23%",
     textAlign: "center",
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     margin: theme.spacing(1),
   },
   media: {
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "contain",
     backgroundPosition: "center",
     "&:hover": {
-      transform: "scale(1.1)",
+      transform: "scale(1.05)",
     },
   },
 }));
@@ -32,17 +34,23 @@ const ProductCard = ({ id, title, imageURL, description, price }) => {
   const classes = useStyles();
 
   return (
-    <Card key={id} className={classes.root}>
-      <CardMedia className={classes.media} image={imageURL} title={title} />
-      <CardHeader title={title} subheader={description} />
-      <CardContent>
-        <Typography variant="body2" component="p">
-          ${price}.00
-        </Typography>
-        <Button> View Product </Button>
-        <Button> Add to Cart </Button>
-      </CardContent>
-    </Card>
+    <ThemeProvider theme={theme}>
+      <Card key={id} className={classes.root}>
+        <CardMedia className={classes.media} image={imageURL} title={title} />
+        <CardHeader title={title} subheader={description} />
+        <CardContent>
+          <Typography variant="body2" component="p">
+            ${price}.00
+          </Typography>
+          <Button variant="contained" color="black">
+            View Product
+          </Button>
+          <Button variant="contained" color="primary">
+            Add to Cart
+          </Button>
+        </CardContent>
+      </Card>
+    </ThemeProvider>
   );
 };
 
