@@ -1,14 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getProducts } from "../store";
-// import ProductCard from "./ProductCard.js";
+import ProductCard from "./ProductCard.js";
 
 class Products extends React.Component {
   constructor() {
     super();
-    this.state = {
-      category: "all",
-    };
+
     this.onChange = this.onChange.bind(this);
   }
 
@@ -20,18 +18,13 @@ class Products extends React.Component {
 
   render() {
     const { products } = this.props;
-    const { category } = this.state;
 
     return (
       <div>
-        <div className="product-overflow">
-          <ul className="wrapper">
+        <div>
+          <ul>
             {products.map((product) => {
-              return (
-                <div>
-                  <ul>{product.title}</ul>
-                </div>
-              );
+              return <ProductCard key={product.id} {...product} />;
             })}
           </ul>
         </div>
