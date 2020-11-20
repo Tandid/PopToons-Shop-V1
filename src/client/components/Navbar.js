@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { logout } from "../store";
 
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,13 +13,16 @@ import Tab from "@material-ui/core/Tab";
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "../theme";
 
-import Button from "@material-ui/core/Button";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grow from "@material-ui/core/Grow";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
+import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -31,7 +34,18 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     marginRight: theme.spacing(2),
   },
+  blue: theme.palette.blue,
 }));
+
+const StyledBadge = withStyles((theme) => ({
+  badge: {
+    right: -3,
+    top: 15,
+    border: `2px solid ${theme.palette.blue}`,
+    color: theme.palette.blue,
+    padding: "0 4px",
+  },
+}))(Badge);
 
 const Navbar = ({ handleClick, isLoggedIn }) => {
   const classes = useStyles();
@@ -70,15 +84,18 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-
       <AppBar style={{ margin: 0 }} position="static">
         <Toolbar>
           <Grid container justify="space-between">
             <Tab label="Funko Pop Shop" component={Link} to="/" />
             <Grid justify="space-around">
               <Tab label="Products" component={Link} to="products" />
-              <Tab label="Cart #" component={Link} to="/cart" />
               <Tab label="Order History" component={Link} to="/orders" />
+              <IconButton component={Link} to="/cart" aria-label="cart">
+                <StyledBadge badgeContent={1} color="secondary">
+                  <ShoppingCartIcon color="secondary" />
+                </StyledBadge>
+              </IconButton>
               <Tab
                 ref={anchorRef}
                 aria-controls={open ? "menu-list-grow" : undefined}

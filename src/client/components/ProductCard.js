@@ -8,6 +8,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,10 +38,9 @@ const ProductCard = ({ id, title, imageURL, description, price }) => {
       <CardContent>
         <Typography variant="body2" component="p">
           ${price}.00
-          <Link to={`/products/${id}`} className="productLink">
-            More Details
-          </Link>
         </Typography>
+        <Button> View Product </Button>
+        <Button> Add to Cart </Button>
       </CardContent>
     </Card>
   );
