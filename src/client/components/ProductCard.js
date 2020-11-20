@@ -42,7 +42,7 @@ const ProductCard = ({ id, title, imageURL, description, price }) => {
           <Typography variant="body2" component="p">
             ${price}.00
           </Typography>
-          <Button variant="contained" color="black">
+          <Button variant="contained" color="black" href={`/products/${id}`}>
             View Product
           </Button>
           <Button variant="contained" color="primary">

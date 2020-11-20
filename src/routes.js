@@ -2,7 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { withRouter, Route, Switch } from "react-router-dom";
-import { HomePage, Products, Cart, Orders } from "./client/components/index";
+import {
+  HomePage,
+  Products,
+  Cart,
+  Orders,
+  ProductDetails,
+} from "./client/components/index";
 // import { Login, Signup, UserHome } from "./components";
 import { me, getProducts } from "./client/store";
 
@@ -23,6 +29,7 @@ class Routes extends Component {
         <Route exact path="/products" component={Products} />
         <Route path="/cart" component={Cart} />
         <Route path="/orders" component={Orders} />
+        <Route path="/products/:id" component={ProductDetails} />
       </Switch>
     );
   }

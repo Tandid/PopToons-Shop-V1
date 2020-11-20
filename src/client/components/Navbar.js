@@ -89,7 +89,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
           <Grid container justify="space-between">
             <Tab label="Funko Pop Shop" component={Link} to="/" />
             <Grid justify="space-around">
-              <Tab label="Products" component={Link} to="products" />
+              <Tab label="Products" component={Link} to="/products" />
               <Tab label="Order History" component={Link} to="/orders" />
               <IconButton component={Link} to="/cart" aria-label="cart">
                 <StyledBadge badgeContent={1} color="secondary">
