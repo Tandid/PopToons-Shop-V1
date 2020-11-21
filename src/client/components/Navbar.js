@@ -47,7 +47,7 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
-const Navbar = ({ handleClick, isLoggedIn }) => {
+const Navbar = ({ handleClick, isLoggedIn, name }) => {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -104,7 +104,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                 aria-controls={open ? "menu-list-grow" : undefined}
                 aria-haspopup="true"
                 onClick={handleToggle}
-                label="Hello, Guest"
+                label={isLoggedIn ? `Hello, ${name}` : `Hello, Guest`}
               />
               <Popper
                 open={open}
@@ -184,6 +184,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
+    name: state.user.name,
   };
 };
 
