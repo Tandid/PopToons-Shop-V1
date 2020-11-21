@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -9,6 +9,8 @@ import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 
 import { ThemeProvider } from "@material-ui/styles";
+import ProductCard from "./ProductCard.js";
+
 import theme from "../theme";
 
 import Footer from "./Footer";
@@ -62,9 +64,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HomePage = (props) => {
+const HomePage = ({ products, randomProducts }) => {
   const classes = useStyles();
-  const { email } = props;
+  // const { email } = props;
 
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -72,6 +74,8 @@ const HomePage = (props) => {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
+
+  // useEffect = () => {};
 
   return (
     <ThemeProvider theme={theme}>
@@ -86,6 +90,7 @@ const HomePage = (props) => {
           <div className={classes.center} key={step.label}>
             {Math.abs(activeStep - index) <= 2 ? (
               <img
+                key={index}
                 className={classes.banner}
                 src={step.imgPath}
                 alt={step.label}
@@ -94,6 +99,11 @@ const HomePage = (props) => {
           </div>
         ))}
       </AutoPlaySwipeableViews>
+      <Grid>
+        {/* {randomProducts.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))} */}
+      </Grid>
       <Grid container justify="center" className={classes.root}>
         {/* <Paper
           className={classes.banner}
@@ -132,9 +142,25 @@ const HomePage = (props) => {
   );
 };
 
-const mapState = (state) => {
+const mapState = ({ user, products }) => {
+  // let randomProducts = [];
+  // let hash = {};
+  // const randomNum = (array) => {
+  //   let random = Math.floor(Math.random() * array.length);
+  //   hash[random] ? randomNum() : (hash[random] = random);
+  //   return random;
+  // };
+  // for (let i = 0; i < 3; i++) {
+  //   let randomIdx = randomNum(products);
+  //   let randomProd = products.find((product) => product.id === randomIdx);
+  //   randomProducts.push(randomProd);
+  //   console.log({ randomProducts: randomProducts });
+  // }
+
   return {
-    email: state.user.email,
+    email: user.email,
+    products,
+    // randomProducts,
   };
 };
 

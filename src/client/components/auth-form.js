@@ -1,38 +1,56 @@
 import React from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { auth } from "../store";
+// import {createOrder} from '../store/orders'
 
 /**
  * COMPONENT
  */
-const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, error } = props;
+class AuthForm extends React.Component {
+  constructor() {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
-    </div>
-  );
-};
+  async handleSubmit(event) {
+    event.preventDefault();
+    const formName = event.target.name;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    await this.props.loginOrSignup(email, password, formName);
+    // await this.props.loadUser()
+    // if (formName === "signup") {
+    //   await this.props.createCart({ userId: this.props.user.id });
+    // }
+  }
+
+  render() {
+    const { handleSubmit } = this;
+    const { name, displayName, error } = this.props;
+
+    return (
+      <div className="auth-form-wrapper">
+        <form className="auth-form" onSubmit={handleSubmit} name={name}>
+          <div>
+            <large>Email: </large>
+            <input name="email" type="text" />
+          </div>
+          <div>
+            <large>Password: </large>
+            <input name="password" type="password" />
+          </div>
+          <div>
+            <button type="submit">{displayName}</button>
+          </div>
+          {error && error.response && <div> {error.response.data} </div>}
+          <a className="Oauth" href="/auth/google">
+            {displayName} with Google
+          </a>
+        </form>
+      </div>
+    );
+  }
+}
 
 /**
  * CONTAINER
@@ -41,43 +59,38 @@ const AuthForm = (props) => {
  *   function, and share the same Component. This is a good example of how we
  *   can stay DRY with interfaces that are very similar to each other!
  */
-const mapLogin = (state) => {
+const mapLogin = ({ user }) => {
   return {
     name: "login",
     displayName: "Login",
-    error: state.user.error,
+    error: user.error,
   };
 };
 
-const mapSignup = (state) => {
+const mapSignup = ({ user }) => {
   return {
     name: "signup",
     displayName: "Sign Up",
-    error: state.user.error,
+    error: user.error,
+    user,
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit(evt) {
-      evt.preventDefault();
-      const formName = evt.target.name;
-      const email = evt.target.email.value;
-      const password = evt.target.password.value;
-      dispatch(auth(email, password, formName));
-    },
+    // handleSubmit(evt) {
+    //   evt.preventDefault()
+    //   const formName = evt.target.name
+    //   const email = evt.target.email.value
+    //   const password = evt.target.password.value
+    // dispatch(auth(email, password, formName))
+    // },
+    loginOrSignup: (email, password, formName) =>
+      dispatch(auth(email, password, formName)),
+    // loadUser: () => dispatch(me()),
+    // createCart: order => dispatch(createOrder(order))
   };
 };
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm);
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
-
-/**
- * PROP TYPES
- */
-AuthForm.propTypes = {
-  name: PropTypes.string.isRequired,
-  displayName: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object,
-};
+export const Login = connect(mapLogin, mapDispatchToProps)(AuthForm);
+export const Signup = connect(mapSignup, mapDispatchToProps)(AuthForm);

@@ -124,9 +124,36 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                           autoFocusItem={open}
                           onKeyDown={handleListKeyDown}
                         >
-                          <MenuItem onClick={handleClose}>Profile</MenuItem>
-                          <MenuItem onClick={handleClose}>My account</MenuItem>
-                          <MenuItem onClick={handleClose}>Logout</MenuItem>
+                          {/* <MenuItem
+                            onClick={handleClose}
+                            component="a"
+                            href="/profile"
+                          >
+                            Account
+                          </MenuItem> */}
+
+                          <MenuItem
+                            onClick={handleClose}
+                            component="a"
+                            href="/login"
+                          >
+                            Log In
+                          </MenuItem>
+
+                          <MenuItem
+                            onClick={handleClose}
+                            component="a"
+                            href="/signup"
+                          >
+                            Sign Up
+                          </MenuItem>
+                          <MenuItem
+                            onClick={(handleClose, handleClick)}
+                            component="a"
+                            href="#"
+                          >
+                            Log Out
+                          </MenuItem>
                         </MenuList>
                       </ClickAwayListener>
                     </Paper>
