@@ -8,8 +8,8 @@ import {
   Cart,
   Orders,
   ProductDetails,
-  Login,
-  Signup,
+  LoginForm,
+  SignupForm,
 } from "./client/components/index";
 // import { Login, Signup, UserHome } from "./components";
 import { me, getProducts } from "./client/store";
@@ -28,8 +28,8 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={HomePage} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route path="/login" component={LoginForm} />
+        <Route path="/signup" component={SignupForm} />
         <Route exact path="/products" component={Products} />
         <Route path="/products/:id" component={ProductDetails} />
         <Route path="/cart" component={Cart} />
