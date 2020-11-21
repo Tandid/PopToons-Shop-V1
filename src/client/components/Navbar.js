@@ -90,7 +90,10 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
             <Tab label="Funko Pop Shop" component={Link} to="/" />
             <Grid justify="space-around">
               <Tab label="Products" component={Link} to="/products" />
-              <Tab label="Order History" component={Link} to="/orders" />
+              {isLoggedIn && (
+                <Tab label="Order History" component={Link} to="/orders" />
+              )}
+
               <IconButton component={Link} to="/cart" aria-label="cart">
                 <StyledBadge badgeContent={1} color="secondary">
                   <ShoppingCartIcon color="secondary" />
@@ -118,45 +121,55 @@ const Navbar = ({ handleClick, isLoggedIn }) => {
                         placement === "bottom" ? "center top" : "center bottom",
                     }}
                   >
-                    <Paper>
-                      <ClickAwayListener onClickAway={handleClose}>
-                        <MenuList
-                          autoFocusItem={open}
-                          onKeyDown={handleListKeyDown}
-                        >
-                          {/* <MenuItem
-                            onClick={handleClose}
-                            component="a"
-                            href="/profile"
+                    {isLoggedIn ? (
+                      <Paper>
+                        <ClickAwayListener onClickAway={handleClose}>
+                          <MenuList
+                            autoFocusItem={open}
+                            onKeyDown={handleListKeyDown}
                           >
-                            Account
-                          </MenuItem> */}
-
-                          <MenuItem
-                            onClick={handleClose}
-                            component="a"
-                            href="/login"
+                            <MenuItem
+                              onClick={handleClose}
+                              component="a"
+                              href="/profile"
+                            >
+                              Account
+                            </MenuItem>
+                            <MenuItem
+                              onClick={(handleClose, handleClick)}
+                              component="a"
+                              href="#"
+                            >
+                              Log Out
+                            </MenuItem>
+                          </MenuList>
+                        </ClickAwayListener>
+                      </Paper>
+                    ) : (
+                      <Paper>
+                        <ClickAwayListener onClickAway={handleClose}>
+                          <MenuList
+                            autoFocusItem={open}
+                            onKeyDown={handleListKeyDown}
                           >
-                            Log In
-                          </MenuItem>
-
-                          <MenuItem
-                            onClick={handleClose}
-                            component="a"
-                            href="/signup"
-                          >
-                            Sign Up
-                          </MenuItem>
-                          <MenuItem
-                            onClick={(handleClose, handleClick)}
-                            component="a"
-                            href="#"
-                          >
-                            Log Out
-                          </MenuItem>
-                        </MenuList>
-                      </ClickAwayListener>
-                    </Paper>
+                            <MenuItem
+                              onClick={handleClose}
+                              component="a"
+                              href="/login"
+                            >
+                              Log In
+                            </MenuItem>
+                            <MenuItem
+                              onClick={handleClose}
+                              component="a"
+                              href="/signup"
+                            >
+                              Sign Up
+                            </MenuItem>
+                          </MenuList>
+                        </ClickAwayListener>
+                      </Paper>
+                    )}
                   </Grow>
                 )}
               </Popper>
