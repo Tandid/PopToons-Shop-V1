@@ -1,37 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import ProductList from "./ProductList";
 import { deleteOrderItem, getOrderItems } from "../store/orderItems";
 import { updateOrder } from "../store/orders";
+import { Paper, Typography, Button, Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-import Button from "@material-ui/core/Button";
+const useStyles = makeStyles({
+  root: {
+    minHeight: "600px",
+    marginLeft: "5%",
+    marginRight: "5%",
+    marginTop: "3%",
+    padding: "2%",
+  },
+  center: {
+    display: "flex",
+    justifyContent: "center",
+  },
+});
 
-class Cart extends React.Component {
-  constructor() {
-    super();
-  }
+const Cart = ({ orderItems, loadOrderItems }) => {
+  const classes = useStyles();
 
-  componentDidMount() {
-    this.props.loadOrderItems();
-  }
+  useEffect(() => {
+    loadOrderItems();
+  }, []);
 
-  render() {
-    const { orderItems } = this.props;
-    return (
-      <div className="cart-wrapper">
-        <h1>Cart</h1>
-        <ul>
-          {orderItems.map((orderItem) => (
-            <ProductList key={Math.random()} {...orderItem} />
-          ))}
-        </ul>
-        <p>Total Price: </p>
-        <Button> Clear Cart </Button>
-        <Button> Checkout </Button>
-      </div>
-    );
-  }
-}
+  return (
+    <Paper className={classes.root}>
+      <Typography className={classes.center} variant="h4">
+        Cart
+      </Typography>
+      <ul>
+        {orderItems.map((orderItem) => (
+          <ProductList key={Math.random()} {...orderItem} />
+        ))}
+      </ul>
+      <Typography className={classes.center} variant="h6">
+        Total Price:
+      </Typography>
+      <br />
+      <br />
+      <Grid className={classes.center}>
+        <Button variant="outlined"> Clear Cart </Button>
+        <Button variant="outlined"> Checkout </Button>
+      </Grid>
+    </Paper>
+  );
+};
 
 const mapStateToProps = ({ orders, orderItems, user, products }) => {
   return {

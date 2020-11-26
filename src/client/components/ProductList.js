@@ -6,7 +6,8 @@ import {
   getOrderItems,
 } from "../store/orderItems";
 import { updateOrder } from "../store/orders";
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, IconButton, Typography } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 class ProductList extends React.Component {
   constructor() {
@@ -24,16 +25,23 @@ class ProductList extends React.Component {
           <Grid container justify="space-around" alignItems="center">
             <img className="cartItems" src={product.imageURL} />
             <Grid>
-              <p>{product.title}</p>
+              <Typography variant="h6">{product.title}</Typography>
             </Grid>
-            <p>x {quantity}</p>
+            <Typography variant="h6">x {quantity}</Typography>
             <Grid>
-              <Button value="-">-</Button>
-              <Button value="+">+</Button>
+              <Button variant="outlined" value="-">
+                -
+              </Button>
+              <Button variant="outlined" value="+">
+                +
+              </Button>
             </Grid>
-            <p>${product.price * quantity}</p>
-            <Button>Remove From Cart</Button>
+            <Typography variant="h6">${product.price * quantity}</Typography>
+            <IconButton>
+              <DeleteIcon />
+            </IconButton>
           </Grid>
+          <br />
         </div>
       );
     }

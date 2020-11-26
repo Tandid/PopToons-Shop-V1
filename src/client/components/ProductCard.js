@@ -38,10 +38,8 @@ const ProductCard = ({ id, title, imageURL, description, price }) => {
       <Card key={id} className={classes.root}>
         <CardMedia className={classes.media} image={imageURL} title={title} />
         <CardHeader title={title} subheader={description} />
+        <Typography variant="h6">${price}.00</Typography>
         <CardContent>
-          <Typography variant="body2" component="p">
-            ${price}.00
-          </Typography>
           <Button variant="contained" color="black" href={`/products/${id}`}>
             View Product
           </Button>
