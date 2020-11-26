@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch } from "react-router-dom";
 import {
@@ -30,6 +29,7 @@ class Routes extends Component {
   }
   render() {
     const { isLoggedIn } = this.props;
+    const { user } = this.props;
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}

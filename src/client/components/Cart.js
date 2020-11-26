@@ -23,6 +23,8 @@ class Cart extends React.Component {
             <ProductList key={Math.random()} {...orderItem} />
           ))}
         </ul>
+        <p>Total Price: </p>
+        <button> Clear Cart </button>
       </div>
     );
   }
