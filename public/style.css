@@ -14,3 +14,8 @@ body {
   border-radius: 1rem;
   margin: 0.5rem;
 }
+
+.cartItems {
+  height: 150px;
+  width: 120px;
+}

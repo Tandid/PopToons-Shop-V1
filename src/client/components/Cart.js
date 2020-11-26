@@ -4,6 +4,8 @@ import ProductList from "./ProductList";
 import { deleteOrderItem, getOrderItems } from "../store/orderItems";
 import { updateOrder } from "../store/orders";
 
+import Button from "@material-ui/core/Button";
+
 class Cart extends React.Component {
   constructor() {
     super();
@@ -24,7 +26,8 @@ class Cart extends React.Component {
           ))}
         </ul>
         <p>Total Price: </p>
-        <button> Clear Cart </button>
+        <Button> Clear Cart </Button>
+        <Button> Checkout </Button>
       </div>
     );
   }
