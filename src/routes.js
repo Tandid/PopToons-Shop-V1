@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
-
 import { withRouter, Route, Switch } from "react-router-dom";
 import {
   HomePage,
@@ -11,8 +11,14 @@ import {
   LoginForm,
   SignupForm,
 } from "./client/components/index";
-// import { Login, Signup, UserHome } from "./components";
-import { me, getProducts } from "./client/store";
+import { me, getProducts, getUsers } from "./client/store";
+import {
+  getOrderItems,
+  deleteOrderItem,
+  createOrderItem,
+  updateOrderItem,
+} from "./client/store/orderItems";
+import { getOrders, createOrder, updateOrder } from "./client/store/orders";
 
 class Routes extends Component {
   constructor() {
@@ -58,7 +64,10 @@ class Routes extends Component {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
+    user: state.user,
     products: state.products,
+    orders: state.orders,
+    orderItems: state.orderItems,
   };
 };
 
@@ -67,6 +76,9 @@ const mapDispatch = (dispatch) => {
     loadInitialData() {
       dispatch(me());
       dispatch(getProducts());
+      dispatch(getUsers());
+      dispatch(getOrders());
+      dispatch(getOrderItems());
     },
   };
 };
