@@ -29,4 +29,18 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
+router.put("/:id", (req, res, next) => {
+  Product.findByPk(req.params.id)
+    .then((product) =>
+      product.update({
+        title: req.body.title,
+        description: req.body.description,
+        imageURL: req.body.imageURL,
+        price: req.body.price,
+      })
+    )
+    .then((product) => res.send(product))
+    .catch(next);
+});
+
 module.exports = router;
