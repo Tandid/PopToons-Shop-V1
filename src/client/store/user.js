@@ -20,7 +20,7 @@ const defaultUser = {};
  * ACTION CREATORS
  */
 const _getUser = (user) => ({ type: GET_USER, user });
-const _getUsers = (user) => ({ type: GET_USERS, users });
+const _getUsers = (users) => ({ type: GET_USERS, users });
 const _removeUser = (id) => ({ type: REMOVE_USER, id });
 const _updateUser = (user) => ({ type: UPDATE_USER, user });
 const _createUser = (user) => ({ type: CREATE_USER, user });
