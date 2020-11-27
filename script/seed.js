@@ -100,13 +100,23 @@ async function seed() {
       status: "cart",
       totalPrice: parseFloat(b.price) + parseFloat(d.price),
     }),
+    Order.create({
+      userId: tandid.id,
+      status: "completed",
+      totalPrice: parseFloat(b.price) + parseFloat(d.price),
+    }),
   ]);
 
-  const [activeOrder] = orders;
+  const [activeOrder, completedOrder] = orders;
 
   const cart = await Promise.all([
     OrderItems.create({ productId: c.id, orderId: activeOrder.id }),
     OrderItems.create({ productId: f.id, orderId: activeOrder.id }),
+  ]);
+
+  const cart2 = await Promise.all([
+    OrderItems.create({ productId: d.id, orderId: completedOrder.id }),
+    OrderItems.create({ productId: g.id, orderId: completedOrder.id }),
   ]);
 
   console.log(`seeded ${users.length} users`);
