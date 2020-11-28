@@ -1,33 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import OrderCard from "./OrderCard";
 import { getOrders } from "../store/orders";
 
-class Orders extends React.Component {
-  constructor() {
-    super();
-  }
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 
-  componentDidMount() {
-    this.props.fetchOrders();
-  }
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: "600px",
+    marginLeft: "5%",
+    marginRight: "5%",
+    marginTop: "3%",
+    padding: "2%",
+  },
+  center: {
+    display: "flex",
+    justifyContent: "center",
+  },
+}));
 
-  render() {
-    const { orders, user } = this.props;
-    return (
-      <div>
-        <h1>Order History</h1>
-        {orders
-          .filter(
-            (order) => order.userId === user.id && order.status !== "cart"
-          )
-          .map((order) => (
-            <OrderCard key={order.id} {...order} />
-          ))}
-      </div>
-    );
-  }
-}
+const Orders = ({ fetchOrders, orders, user }) => {
+  const classes = useStyles();
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  return (
+    <Paper className={classes.root}>
+      <Typography variant="h4" className={classes.center}>
+        Order History
+      </Typography>
+
+      {orders
+        .filter((order) => order.userId === user.id && order.status !== "cart")
+        .map((order) => (
+          <OrderCard key={order.id} {...order} />
+        ))}
+    </Paper>
+  );
+};
 
 const mapStateToProps = ({ orders, user }) => {
   return {
