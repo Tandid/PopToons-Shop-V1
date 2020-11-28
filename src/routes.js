@@ -9,6 +9,7 @@ import {
   ProductDetails,
   LoginForm,
   SignupForm,
+  Checkout,
 } from "./client/components/index";
 import { me, getProducts, getUsers } from "./client/store";
 import {
@@ -40,7 +41,7 @@ class Routes extends Component {
         <Route path="/products/:id" component={ProductDetails} />
         <Route path="/cart" component={Cart} />
         <Route path="/orders" component={Orders} />
-        {/* <Route path="/checkout" component={Checkout} /> */}
+        <Route path="/checkout" component={Checkout} />
         {/* <Route path="/confirmation/:id" component={Confirmation} /> */}
         {isLoggedIn && (
           <Switch>

@@ -49,9 +49,10 @@ const StyledBadge = withStyles((theme) => ({
 
 const Navbar = ({ handleClick, isLoggedIn, name, cartOrderItems }) => {
   const classes = useStyles();
-  const cartTotal = cartOrderItems.reduce((val, prod) => {
-    return (val += prod.quantity);
-  }, 0);
+  // const cartTotal = cartOrderItems.reduce((val, prod) => {
+  //   return (val += prod.quantity);
+  // }, 0);
+  const cartTotal = 10;
 
   const [open, setOpen] = React.useState(false);
 
@@ -99,7 +100,10 @@ const Navbar = ({ handleClick, isLoggedIn, name, cartOrderItems }) => {
               )}
 
               <IconButton component={Link} to="/cart" aria-label="cart">
-                <StyledBadge badgeContent={cartTotal} color="secondary">
+                <StyledBadge
+                  badgeContent={cartTotal ? cartTotal : "0"}
+                  color="secondary"
+                >
                   <ShoppingCartIcon color="secondary" />
                 </StyledBadge>
               </IconButton>
@@ -196,17 +200,16 @@ const mapState = ({ user, orders, orderItems }) => {
           order.userId === localStorage.getItem("guestId")
       );
 
-  const cartOrderItems = orderItems.filter(
-    (orderItem) => orderItem.orderId === cart.id
-  );
-  console.log(cartOrderItems);
+  // const cartOrderItems = orderItems.filter(
+  //   (orderItem) => orderItem.orderId === cart.id
+  // );
 
   return {
     isLoggedIn: !!user.id,
     name: user.name,
     cart,
     orderItems,
-    cartOrderItems,
+    // cartOrderItems,
   };
 };
 

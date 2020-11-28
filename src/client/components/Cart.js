@@ -20,42 +20,106 @@ const useStyles = makeStyles({
   },
 });
 
-const Cart = ({ orderItems, loadOrderItems }) => {
+const Cart = ({
+  orderItems,
+  loadOrderItems,
+  cart,
+  cartOrderItems,
+  products,
+  updateTotalPrice,
+}) => {
   const classes = useStyles();
+
+  async function clearCart(event) {
+    event.preventDefault();
+    const cartOrderItems = await orderItems.filter(
+      (orderItem) => orderItem.orderId === cart.id
+    );
+    try {
+      let orderItemsPrice = 0;
+      await cartOrderItems.forEach((orderItem) => {
+        orderItemsPrice =
+          orderItemsPrice +
+          parseFloat(
+            products.find((product) => product.id === orderItem.productId).price
+          ).toFixed(2) *
+            orderItem.quantity;
+      });
+      await updateTotalPrice(
+        {
+          id: cart.id,
+          totalPrice: parseFloat(cart.totalPrice).toFixed(2) - orderItemsPrice,
+        },
+        () => {}
+      );
+      await cartOrderItems.forEach((orderItem) => {
+        this.props.removeFromCart(orderItem);
+      });
+    } catch (exception) {
+      console.log(exception);
+    }
+  }
 
   useEffect(() => {
     loadOrderItems();
   }, []);
 
-  return (
-    <Paper className={classes.root}>
-      <Typography className={classes.center} variant="h4">
-        Cart
-      </Typography>
-      <ul>
-        {orderItems.map((orderItem) => (
-          <ProductList key={Math.random()} {...orderItem} />
-        ))}
-      </ul>
-      <Typography className={classes.center} variant="h6">
-        Total Price:
-      </Typography>
-      <br />
-      <br />
-      <Grid className={classes.center}>
-        <Button variant="outlined"> Clear Cart </Button>
-        <Button variant="outlined"> Checkout </Button>
-      </Grid>
-    </Paper>
-  );
+  if (!cart || !orderItems) {
+    return <h1>Loading...</h1>;
+  } else {
+    return (
+      <Paper className={classes.root}>
+        <Typography className={classes.center} variant="h4">
+          Cart
+        </Typography>
+        <ul>
+          {cartOrderItems.map((orderItem) => (
+            <ProductList key={Math.random()} {...orderItem} />
+          ))}
+        </ul>
+        <Typography className={classes.center} variant="h6">
+          Total Price: ${Math.abs(parseFloat(cart.totalPrice).toFixed(2))}{" "}
+        </Typography>
+        <br />
+        <br />
+        <Grid className={classes.center}>
+          <Button onClick={clearCart} variant="outlined">
+            Clear Cart
+          </Button>
+          <Button
+            variant="outlined"
+            href="/checkout"
+            disabled={!cartOrderItems.length}
+          >
+            Checkout
+          </Button>
+        </Grid>
+      </Paper>
+    );
+  }
 };
 
 const mapStateToProps = ({ orders, orderItems, user, products }) => {
+  const cart = user.id
+    ? orders.find(
+        (order) => order.status === "cart" && order.userId === user.id
+      )
+    : orders.find(
+        (order) =>
+          order.status === "cart" &&
+          order.userId === localStorage.getItem("guestId")
+      );
+
+  const cartOrderItems = orderItems.filter(
+    (orderItem) => orderItem.orderId === cart.id
+  );
   return {
     orderItems,
     user,
     products,
     orders,
+    cart,
+    cartOrderItems,
   };
 };
 
