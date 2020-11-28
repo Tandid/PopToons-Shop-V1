@@ -12,6 +12,7 @@ const useStyles = makeStyles({
     marginLeft: "5%",
     marginRight: "5%",
     marginTop: "3%",
+    marginBottom: "3%",
     padding: "2%",
   },
   center: {

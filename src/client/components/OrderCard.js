@@ -40,7 +40,7 @@ const OrderCard = ({ id, status, totalPrice, orderItems, products }) => {
           </Typography>
           <Typography variant="h6" className={classes.heading}>
             {" "}
-            / {status}
+            : {status.toUpperCase()}
           </Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.root}>
