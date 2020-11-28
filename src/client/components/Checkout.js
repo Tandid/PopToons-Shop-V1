@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,21 +60,13 @@ const Checkout = ({
 
   const classes = useStyles();
 
-  useEffect((prevProps) => {
-    loadUser();
-    // if (prevProps.user.firstName !== user.firstName && user.firstName) {
-    //   this.setState(setFirstName);
-    // }
-    // if (prevProps.user.lastName !== user.lastName && this.props.user.lastName) {
-    //   this.setState(setLastName);
-    // }
-    // if (prevProps.user.email !== user.email && user.email) {
-    //   this.setState(setEmail);
-    // }
-    // if (prevProps.user.address !== user.address && user.address) {
-    //   this.setState(setAddress);
-    // }
-  }, []);
+  useEffect(
+    (prevProps) => {
+      loadUser();
+      console.log(firstName, lastName, email, address);
+    },
+    [firstName, lastName, email, address]
+  );
 
   async function onSubmit() {
     try {
@@ -145,33 +138,25 @@ const Checkout = ({
                 Shipping/Billing
               </Typography>
               <Grid container direction="column" justify="space-between">
-                <input
-                  type="text"
-                  name="firstName"
-                  onChange={handleChange}
+                <TextField
                   value={firstName}
-                  placeholder="First Name"
+                  onChange={(event) => setFirstName(event.target.value)}
+                  label="First Name"
                 />
-                <input
-                  type="text"
-                  name="lastName"
-                  onChange={handleChange}
+                <TextField
                   value={lastName}
-                  placeholder="Last Name"
+                  onChange={(event) => setLastName(event.target.value)}
+                  label="Last Name"
                 />
-                <input
-                  type="text"
-                  name="email"
-                  onChange={handleChange}
+                <TextField
                   value={email}
-                  placeholder="Email"
+                  onChange={(event) => setEmail(event.target.value)}
+                  label="Email"
                 />
-                <input
-                  type="text"
-                  name="address"
-                  onChange={handleChange}
+                <TextField
                   value={address}
-                  placeholder="Address"
+                  onChange={(event) => setAddress(event.target.value)}
+                  label="Address"
                 />
                 <Typography className={classes.center} variant="h4">
                   Payment Method{" "}
@@ -182,17 +167,17 @@ const Checkout = ({
                 <Button variant="outlined" href="/cart">
                   Edit Cart
                 </Button>
-                <StripeCheckout
-                  disabled={!firstName || !lastName || !email || !address}
-                  stripeKey="pk_test_E1dVa6505p5SZc6KIGv6yrQB00yOT20RJM"
-                  token={handleToken}
-                  email={email}
-                  amount={parseFloat(cart.totalPrice).toFixed(2) * 100}
-                />
               </Grid>
             </Paper>
           </Grid>
         </form>
+        <StripeCheckout
+          disabled={!firstName || !lastName || !email || !address}
+          stripeKey="pk_test_E1dVa6505p5SZc6KIGv6yrQB00yOT20RJM"
+          token={handleToken}
+          email={email}
+          amount={parseFloat(cart.totalPrice).toFixed(2) * 100}
+        />
       </Paper>
     );
   }
