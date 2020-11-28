@@ -47,10 +47,14 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
-const Navbar = ({ handleClick, isLoggedIn, name }) => {
+const Navbar = ({ handleClick, isLoggedIn, name, cartOrderItems }) => {
   const classes = useStyles();
+  const cartTotal = cartOrderItems.reduce((val, prod) => {
+    return (val += prod.quantity);
+  }, 0);
 
   const [open, setOpen] = React.useState(false);
+
   const anchorRef = React.useRef(null);
 
   const handleToggle = () => {
@@ -95,7 +99,7 @@ const Navbar = ({ handleClick, isLoggedIn, name }) => {
               )}
 
               <IconButton component={Link} to="/cart" aria-label="cart">
-                <StyledBadge badgeContent={1} color="secondary">
+                <StyledBadge badgeContent={cartTotal} color="secondary">
                   <ShoppingCartIcon color="secondary" />
                 </StyledBadge>
               </IconButton>
@@ -181,10 +185,28 @@ const Navbar = ({ handleClick, isLoggedIn, name }) => {
   );
 };
 
-const mapState = (state) => {
+const mapState = ({ user, orders, orderItems }) => {
+  const cart = user.id
+    ? orders.find(
+        (order) => order.status === "cart" && order.userId === user.id
+      )
+    : orders.find(
+        (order) =>
+          order.status === "cart" &&
+          order.userId === localStorage.getItem("guestId")
+      );
+
+  const cartOrderItems = orderItems.filter(
+    (orderItem) => orderItem.orderId === cart.id
+  );
+  console.log(cartOrderItems);
+
   return {
-    isLoggedIn: !!state.user.id,
-    name: state.user.name,
+    isLoggedIn: !!user.id,
+    name: user.name,
+    cart,
+    orderItems,
+    cartOrderItems,
   };
 };
 
