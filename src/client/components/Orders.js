@@ -13,7 +13,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "5%",
     marginRight: "5%",
     marginTop: "3%",
-    padding: "2%",
+    paddingTop: "2%",
+    paddingLeft: "5%",
+    paddingRight: "5%",
   },
   center: {
     display: "flex",

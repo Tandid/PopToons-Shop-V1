@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { createOrderItem, updateOrderItem } from "../store/orderItems";
+import { updateOrder } from "../store/orders";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -30,8 +32,50 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductCard = ({ id, title, imageURL, description, price }) => {
+const ProductCard = ({
+  id,
+  title,
+  imageURL,
+  description,
+  price,
+  orderItems,
+  newOrderItem,
+  incrementOrderItem,
+  updateTotalPrice,
+  cart,
+}) => {
   const classes = useStyles();
+
+  async function addToCart(event) {
+    event.preventDefault();
+    try {
+      const existingOrderItem = orderItems.find(
+        (orderItem) =>
+          orderItem.productId === id && orderItem.orderId === cart.id
+      );
+      if (!existingOrderItem) {
+        await newOrderItem({
+          productId: id,
+          orderId: cart.id,
+        });
+      } else {
+        await incrementOrderItem({
+          productId: id,
+          orderId: cart.id,
+          quantity: existingOrderItem.quantity + 1,
+        });
+      }
+      await updateTotalPrice(
+        {
+          id: cart.id,
+          totalPrice: parseFloat(cart.totalPrice) + parseFloat(price),
+        },
+        () => {}
+      );
+    } catch (exception) {
+      console.log(exception);
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -43,7 +87,7 @@ const ProductCard = ({ id, title, imageURL, description, price }) => {
           <Button variant="contained" color="black" href={`/products/${id}`}>
             View Product
           </Button>
-          <Button variant="contained" color="primary">
+          <Button onClick={addToCart} variant="contained" color="primary">
             Add to Cart
           </Button>
         </CardContent>
@@ -52,10 +96,29 @@ const ProductCard = ({ id, title, imageURL, description, price }) => {
   );
 };
 
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = ({ user, orders, orderItems }) => {
+  const cart = user.id
+    ? orders.find(
+        (order) => order.status === "cart" && order.userId === user.id
+      )
+    : orders.find(
+        (order) =>
+          order.status === "cart" &&
+          order.userId === localStorage.getItem("guestId")
+      );
   return {
     user,
+    cart,
+    orderItems,
   };
 };
 
-export default connect(mapStateToProps)(ProductCard);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    newOrderItem: (orderItem) => dispatch(createOrderItem(orderItem)),
+    incrementOrderItem: (orderItem) => dispatch(updateOrderItem(orderItem)),
+    updateTotalPrice: (order, push) => dispatch(updateOrder(order, push)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);
