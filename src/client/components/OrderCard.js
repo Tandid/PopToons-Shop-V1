@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { product } from "../store/orders";
+import { product } from "../store/product";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
@@ -9,14 +9,18 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { updateOrder } from "../store/orders";
+import { Grid, Button, IconButton } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
+  center: {
+    alignItems: "center",
   },
 }));
 
@@ -27,53 +31,62 @@ const OrderCard = ({ id, status, totalPrice, orderItems, products }) => {
     return <h1>Loading...</h1>;
   } else {
     return (
-      <div className="order-card-wrapper">
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>
-              Order #{id} / {status}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <ul className="order-card" key={Math.random()}>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography variant="h6" className={classes.heading}>
+            ORDER #{id}
+          </Typography>
+          <Typography variant="h6" className={classes.heading}>
+            {" "}
+            / {status}
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails className={classes.root}>
+          {orderItems
+            .filter((orderItem) => orderItem.orderId === id)
+            .map((orderItem) => (
               <div>
-                <ul>
-                  {orderItems
-                    .filter((orderItem) => orderItem.orderId === id)
-                    .map((orderItem) => (
-                      <div className="order-card-items" key={Math.random()}>
-                        <li>X{orderItem.quantity}</li>
-                        <li>
-                          {
-                            products.find(
-                              (product) => product.id === orderItem.productId
-                            ).title
-                          }
-                        </li>
-
-                        <li>
-                          $
-                          {
-                            products.find(
-                              (product) => product.id === orderItem.productId
-                            ).price
-                          }
-                        </li>
-                      </div>
-                    ))}
-                </ul>
-                <div className="total">
-                  Total Price: ${parseFloat(totalPrice).toFixed(2)}
-                </div>
+                <Grid container justify="space-around" alignItems="center">
+                  <img
+                    className="orderItems"
+                    src={
+                      products.find(
+                        (product) => product.id === orderItem.productId
+                      ).imageURL
+                    }
+                  />
+                  <Typography variant="body1">
+                    {
+                      products.find(
+                        (product) => product.id === orderItem.productId
+                      ).title
+                    }
+                  </Typography>
+                  <Typography variant="body1">
+                    x {orderItem.quantity}
+                  </Typography>
+                  <Typography variant="body1">
+                    $
+                    {
+                      products.find(
+                        (product) => product.id === orderItem.productId
+                      ).price
+                    }
+                    .00
+                  </Typography>
+                </Grid>
+                <br />
               </div>
-            </ul>
-          </AccordionDetails>
-        </Accordion>
-      </div>
+            ))}
+          <Typography className={classes.center} variant="h6">
+            Total Price: ${parseFloat(totalPrice).toFixed(2)}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
     );
   }
 };

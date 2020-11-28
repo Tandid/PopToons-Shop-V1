@@ -16,6 +16,12 @@ body {
 }
 
 .cartItems {
-  height: 150px;
-  width: 120px;
+  /* height: 150px; */
+  width: 80px;
+  object-fit: contain;
+}
+
+.orderItems {
+  width: 70px;
+  object-fit: contain;
 }

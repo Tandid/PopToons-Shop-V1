@@ -33,7 +33,7 @@ const Orders = ({ fetchOrders, orders, user }) => {
       <Typography variant="h4" className={classes.center}>
         Order History
       </Typography>
-
+      <br />
       {orders
         .filter((order) => order.userId === user.id && order.status !== "cart")
         .map((order) => (
