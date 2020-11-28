@@ -33,8 +33,10 @@ const useStyles = makeStyles((theme) => ({
   leftContainer: {
     padding: "2%",
     width: "60%",
+    minHeight: "600px",
   },
   rightContainer: {
+    minHeight: "600px",
     padding: "2%",
     width: "35%",
   },
@@ -119,65 +121,66 @@ const Checkout = ({
     );
     return (
       <Paper className={classes.root}>
-        <form onSubmit={onSubmit}>
-          <Grid container direction="row" justify="space-evenly">
-            <Paper className={classes.leftContainer}>
+        {/* <form onSubmit={onSubmit}> */}
+        <Grid container direction="row" justify="space-evenly">
+          <Paper className={classes.leftContainer}>
+            <Typography className={classes.center} variant="h4">
+              Items in Cart
+            </Typography>
+            <div>
+              <ul>
+                {cartOrderItems.map((orderItem) => (
+                  <ProductList key={Math.random()} {...orderItem} />
+                ))}
+              </ul>
+            </div>
+          </Paper>
+          <Paper className={classes.rightContainer}>
+            <Typography className={classes.center} variant="h4">
+              Shipping/Billing
+            </Typography>
+            <Grid container direction="column" justify="space-between">
+              <TextField
+                value={firstName}
+                onChange={(event) => setFirstName(event.target.value)}
+                label="First Name"
+              />
+              <TextField
+                value={lastName}
+                onChange={(event) => setLastName(event.target.value)}
+                label="Last Name"
+              />
+              <TextField
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                label="Email"
+              />
+              <TextField
+                value={address}
+                onChange={(event) => setAddress(event.target.value)}
+                label="Address"
+              />
               <Typography className={classes.center} variant="h4">
-                Items in Cart
+                Payment Method{" "}
               </Typography>
-              <div>
-                <ul>
-                  {cartOrderItems.map((orderItem) => (
-                    <ProductList key={Math.random()} {...orderItem} />
-                  ))}
-                </ul>
-              </div>
-            </Paper>
-            <Paper className={classes.rightContainer}>
-              <Typography className={classes.center} variant="h4">
-                Shipping/Billing
+              <Typography>
+                Total Price: ${parseFloat(cart.totalPrice).toFixed(2)}
               </Typography>
-              <Grid container direction="column" justify="space-between">
-                <TextField
-                  value={firstName}
-                  onChange={(event) => setFirstName(event.target.value)}
-                  label="First Name"
-                />
-                <TextField
-                  value={lastName}
-                  onChange={(event) => setLastName(event.target.value)}
-                  label="Last Name"
-                />
-                <TextField
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  label="Email"
-                />
-                <TextField
-                  value={address}
-                  onChange={(event) => setAddress(event.target.value)}
-                  label="Address"
-                />
-                <Typography className={classes.center} variant="h4">
-                  Payment Method{" "}
-                </Typography>
-                <Typography>
-                  Total Price: ${parseFloat(cart.totalPrice).toFixed(2)}
-                </Typography>
-                <Button variant="outlined" href="/cart">
-                  Edit Cart
-                </Button>
-              </Grid>
-            </Paper>
-          </Grid>
-        </form>
-        <StripeCheckout
-          disabled={!firstName || !lastName || !email || !address}
-          stripeKey="pk_test_E1dVa6505p5SZc6KIGv6yrQB00yOT20RJM"
-          token={handleToken}
-          email={email}
-          amount={parseFloat(cart.totalPrice).toFixed(2) * 100}
-        />
+              <Button variant="outlined" href="/cart">
+                Edit Cart
+              </Button>
+              <StripeCheckout
+                disabled={!firstName || !lastName || !email || !address}
+                stripeKey="pk_test_E1dVa6505p5SZc6KIGv6yrQB00yOT20RJM"
+                token={handleToken}
+                email={email}
+                amount={parseFloat(cart.totalPrice).toFixed(2) * 100}
+                onSubmit={onSubmit}
+              />
+            </Grid>
+          </Paper>
+        </Grid>
+        {/* </form> */}
       </Paper>
     );
   }
