@@ -16,33 +16,39 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import { OrderList } from ".";
 
 const columns = [
-  { id: "id", label: "Product ID", minWidth: 170 },
-  { id: "title", label: "Product Title", minWidth: 100 },
+  { id: "id", label: "Order #", minWidth: 150 },
   {
-    id: "description",
-    label: "Description",
-    minWidth: 170,
+    id: "firstName",
+    label: "First Name",
+    minWidth: 150,
   },
   {
-    id: "price",
-    label: "Price ($)",
-    minWidth: 170,
+    id: "lastName",
+    label: "Last Name",
+    minWidth: 150,
     align: "left",
   },
   {
-    id: "edit",
-    label: "Edit Product",
-    minWidth: 170,
-    align: "right",
+    id: "email",
+    label: "Email Address",
+    minWidth: 150,
   },
   {
-    id: "remove",
-    label: "Remove Product",
-    minWidth: 170,
-    align: "right",
+    id: "status",
+    label: "Order Status",
+    minWidth: 150,
+  },
+  {
+    id: "completeOrder",
+    label: "Complete Order",
+    minWidth: 150,
+  },
+  {
+    id: "cancelOrder",
+    label: "Cancel Order",
+    minWidth: 150,
   },
 ];
 
@@ -67,7 +73,13 @@ const useStyles = makeStyles({
   },
 });
 
-const OrderListing = ({ products, removeProduct }) => {
+const OrderListing = ({
+  products,
+  users,
+  orders,
+  orderItems,
+  removeProduct,
+}) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -84,7 +96,7 @@ const OrderListing = ({ products, removeProduct }) => {
   return (
     <Paper className={classes.root}>
       <Typography className={classes.center} variant="h4">
-        Manage Products
+        Manage Orders
       </Typography>
       <br />
       <TableContainer className={classes.container}>
@@ -103,22 +115,22 @@ const OrderListing = ({ products, removeProduct }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {products
+            {orders
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((prod) => {
+              .map((order) => {
                 return (
-                  <TableRow hover tabIndex={-1} key={prod.id}>
+                  <TableRow hover tabIndex={-1} key={order.id}>
                     {columns.map((column) => {
-                      const value = prod[column.id];
+                      const value = order[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {value}
-                          {column.id === "edit" && (
+                          {column.id === "completeOrder" && (
                             <IconButton>
                               <AddCircleIcon />
                             </IconButton>
                           )}
-                          {column.id === "remove" && (
+                          {column.id === "cancelOrder" && (
                             <IconButton>
                               <HighlightOffIcon
                               // onClick={removeProduct(prod.id)}
@@ -137,7 +149,7 @@ const OrderListing = ({ products, removeProduct }) => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 15, 20]}
         component="div"
-        count={products.length}
+        count={orders.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
@@ -147,8 +159,8 @@ const OrderListing = ({ products, removeProduct }) => {
   );
 };
 
-const mapStateToProps = ({ products }) => {
-  return { products };
+const mapStateToProps = ({ products, users, orders, orderItems }) => {
+  return { products, users, orders, orderItems };
 };
 
 const mapDispatchToProps = (dispatch) => {
