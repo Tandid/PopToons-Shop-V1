@@ -48,7 +48,7 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
-const Navbar = ({ handleClick, isLoggedIn, name, cartOrderItems, user }) => {
+const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
   const classes = useStyles();
   // const cartTotal = cartOrderItems.reduce((val, prod) => {
   //   return (val += prod.quantity);
@@ -145,9 +145,9 @@ const Navbar = ({ handleClick, isLoggedIn, name, cartOrderItems, user }) => {
                               Account
                             </MenuItem>
                             <MenuItem
-                              onClick={(handleClose, handleClick)}
+                              onClick={handleClick}
                               component="a"
-                              href="#"
+                              href="/login"
                             >
                               Log Out
                             </MenuItem>
