@@ -7,3 +7,4 @@ export { default as ProductDetails } from "./productDetails";
 export { default as LoginForm } from "./Login.js";
 export { default as SignupForm } from "./Signup.js";
 export { default as Checkout } from "./Checkout.js";
+export { default as Confirmation } from "./Confirmation.js";
