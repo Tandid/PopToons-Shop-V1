@@ -10,3 +10,5 @@ export { default as Checkout } from "./Checkout.js";
 export { default as Confirmation } from "./Confirmation.js";
 export { default as Account } from "./Account.js";
 export { default as Listings } from "./Listings.js";
+export { default as UserList } from "./UserList.js";
+export { default as OrderList } from "./OrderList.js";

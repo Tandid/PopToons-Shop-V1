@@ -10,10 +10,10 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({
+      firstName: "Tandid",
       email: "tandid@gmail.com",
       password: "123",
       admin: "true",
-      firstName: "Tandid",
     }),
   ]);
 

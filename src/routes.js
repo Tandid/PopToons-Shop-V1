@@ -13,6 +13,8 @@ import {
   Confirmation,
   Account,
   Listings,
+  UserList,
+  OrderList,
 } from "./client/components/index";
 import { me, getProducts, getUsers } from "./client/store";
 import {
@@ -50,8 +52,8 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/account" component={Account} />
             <Route exact path="/listings" component={Listings} />
-            {/* <Route exact path="/userlist" component={UserList} /> */}
-            {/* <Route exact path="/orderlist" component={OrderList} /> */}
+            <Route exact path="/userlist" component={UserList} />
+            <Route exact path="/orderlist" component={OrderList} />
             {/* <Route exact path="/products/:id/edit" component={EditProduct} /> */}
             {/* <Route exact path="/newProduct" component={CreateProduct} /> */}
             {/* Routes placed here are only available after logging in */}

@@ -19,29 +19,31 @@ import TableRow from "@material-ui/core/TableRow";
 
 const columns = [
   { id: "id", label: "Product ID", minWidth: 170 },
-  { id: "title", label: "Product Title", minWidth: 100 },
+  { id: "firstName", label: "First Name", minWidth: 150 },
   {
-    id: "description",
-    label: "Description",
+    id: "lastName",
+    label: "Last Name",
     minWidth: 170,
   },
   {
-    id: "price",
-    label: "Price ($)",
+    id: "email",
+    label: "Email Address",
     minWidth: 170,
-    align: "left",
   },
   {
-    id: "edit",
-    label: "Edit Product",
-    minWidth: 170,
-    align: "right",
+    id: "admin",
+    label: "Admin Status",
+    minWidth: 150,
+  },
+  {
+    id: "updateStatus",
+    label: "Admin Status",
+    minWidth: 150,
   },
   {
     id: "remove",
-    label: "Remove Product",
+    label: "Remove User",
     minWidth: 170,
-    align: "right",
   },
 ];
 
@@ -66,7 +68,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Listings = ({ products, removeProduct }) => {
+const UserList = ({ users, removeProduct }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -83,7 +85,7 @@ const Listings = ({ products, removeProduct }) => {
   return (
     <Paper className={classes.root}>
       <Typography className={classes.center} variant="h4">
-        Manage Products
+        Manage Users
       </Typography>
       <br />
       <TableContainer className={classes.container}>
@@ -102,17 +104,20 @@ const Listings = ({ products, removeProduct }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {products
+            {users
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((prod) => {
+              .map((user) => {
                 return (
-                  <TableRow hover tabIndex={-1} key={prod.id}>
+                  <TableRow hover tabIndex={-1} key={user.id}>
                     {columns.map((column) => {
-                      const value = prod[column.id];
+                      const value = user[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {value}
-                          {column.id === "edit" && (
+                          {/* {column.id === "admin" && user.admin === true
+                            ? "Admin"
+                            : "User"} */}
+                          {column.id === "updateStatus" && (
                             <IconButton>
                               <AddCircleIcon />
                             </IconButton>
@@ -136,7 +141,7 @@ const Listings = ({ products, removeProduct }) => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 15, 20]}
         component="div"
-        count={products.length}
+        count={users.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
@@ -146,8 +151,8 @@ const Listings = ({ products, removeProduct }) => {
   );
 };
 
-const mapStateToProps = ({ products }) => {
-  return { products };
+const mapStateToProps = ({ users }) => {
+  return { users };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -156,4 +161,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Listings);
+export default connect(mapStateToProps, mapDispatchToProps)(UserList);

@@ -16,6 +16,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
+import { OrderList } from ".";
 
 const columns = [
   { id: "id", label: "Product ID", minWidth: 170 },
@@ -66,7 +67,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Listings = ({ products, removeProduct }) => {
+const OrderListing = ({ products, removeProduct }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -156,4 +157,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Listings);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderListing);
