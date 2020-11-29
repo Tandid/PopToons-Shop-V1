@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import { authLogin } from "../store";
 import {
   Avatar,
@@ -37,8 +39,17 @@ const useStyles = makeStyles({
 });
 
 const LoginForm = (props) => {
-  const { handleSubmit, error } = props;
+  const { login, error } = props;
   const classes = useStyles();
+  const history = useHistory();
+
+  function handleSubmit(ev) {
+    ev.preventDefault();
+    const email = ev.target.email.value;
+    const password = ev.target.password.value;
+    login(email, password);
+    history.push("/");
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -114,10 +125,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit(evt) {
-      evt.preventDefault();
-      const email = evt.target.email.value;
-      const password = evt.target.password.value;
+    login(email, password) {
       dispatch(authLogin(email, password));
     },
   };

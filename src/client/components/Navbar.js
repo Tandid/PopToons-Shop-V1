@@ -23,6 +23,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 import { withStyles } from "@material-ui/core/styles";
+import { me } from "../store/user";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -217,6 +218,7 @@ const mapState = ({ user, orders, orderItems }) => {
 const mapDispatch = (dispatch) => {
   return {
     handleClick() {
+      dispatch(me());
       dispatch(logout());
     },
   };

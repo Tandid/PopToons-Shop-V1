@@ -17,13 +17,9 @@ import {
   OrderListing,
 } from "./client/components/index";
 import { me, getProducts, getUsers } from "./client/store";
-import {
-  getOrderItems,
-  deleteOrderItem,
-  createOrderItem,
-  updateOrderItem,
-} from "./client/store/orderItems";
-import { getOrders, createOrder, updateOrder } from "./client/store/orders";
+import { getOrderItems } from "./client/store/orderItems";
+import { getOrders } from "./client/store/orders";
+import { useHistory } from "react-router-dom";
 
 class Routes extends Component {
   constructor() {

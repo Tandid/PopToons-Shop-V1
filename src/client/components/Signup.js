@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { authSignup } from "../store";
+import { useHistory } from "react-router-dom";
+
 import {
   Avatar,
   Button,
@@ -45,12 +47,24 @@ const useStyles = makeStyles({
 
 const SignupForm = (props) => {
   const classes = useStyles();
-  const { handleSubmit, error } = props;
+  const { signup, error } = props;
+  const history = useHistory();
+
   const [value, setValue] = useState(null);
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+  function handleSubmit(ev) {
+    ev.preventDefault();
+    const email = ev.target.email.value;
+    const password = ev.target.password.value;
+    const firstName = ev.target.firstName.value;
+    const lastName = ev.target.lastName.value;
+    signup(email, password);
+    history.push("/");
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -152,14 +166,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit(evt) {
-      evt.preventDefault();
-      const email = evt.target.email.value;
-      const password = evt.target.password.value;
-      const firstName = evt.target.firstName.value;
-      const lastName = evt.target.lastName.value;
-      const isTeacher = evt.target.isTeacher.value;
-      dispatch(authSignup(email, password, firstName, lastName, isTeacher));
+    signup(email, password, firstName, lastName) {
+      dispatch(authSignup(email, password, firstName, lastName));
     },
   };
 };
