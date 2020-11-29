@@ -76,16 +76,24 @@ const Account = ({ user, update, history }) => {
         <Grid className="profile">
           {user.admin === true && (
             <Grid container justify="space-evenly">
-              <Button variant="outlined" className="link-button" to="/listings">
+              <Button
+                variant="outlined"
+                className="link-button"
+                href="/listings"
+              >
                 Manage Products
               </Button>
-              <Button variant="outlined" className="link-button" to="/userlist">
+              <Button
+                variant="outlined"
+                className="link-button"
+                href="/userlist"
+              >
                 Manage Users
               </Button>
               <Button
                 variant="outlined"
                 className="link-button"
-                to="/orderlist"
+                href="/orderlist"
               >
                 Manage Orders
               </Button>

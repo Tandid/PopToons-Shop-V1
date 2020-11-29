@@ -12,6 +12,7 @@ import {
   Checkout,
   Confirmation,
   Account,
+  Listings,
 } from "./client/components/index";
 import { me, getProducts, getUsers } from "./client/store";
 import {
@@ -48,7 +49,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             <Route exact path="/account" component={Account} />
-            {/* <Route exact path="/listings" component={Listings} /> */}
+            <Route exact path="/listings" component={Listings} />
             {/* <Route exact path="/userlist" component={UserList} /> */}
             {/* <Route exact path="/orderlist" component={OrderList} /> */}
             {/* <Route exact path="/products/:id/edit" component={EditProduct} /> */}
