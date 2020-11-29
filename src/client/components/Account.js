@@ -1,0 +1,193 @@
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { updateProfile } from "../store";
+import { Paper, Typography, TextField, Grid, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: "600px",
+    marginLeft: "5%",
+    marginRight: "5%",
+    marginTop: "3%",
+    marginBottom: "3%",
+    paddingTop: "2%",
+    paddingLeft: "5%",
+    paddingRight: "5%",
+    paddingBottom: "2%",
+  },
+  center: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  text: {
+    fontWeight: "bold",
+    display: "flex",
+    alignItems: "flex-end",
+  },
+  profileInfo: {
+    width: "70%",
+  },
+}));
+
+const Account = ({ user, update, history }) => {
+  const [firstName, setFirstName] = useState(
+    user.firstName ? user.firstName : ""
+  );
+  const [lastName, setLastName] = useState(user.lastName ? user.lastName : "");
+  const [email, setEmail] = useState(user.email ? user.email : "");
+  const [imageURL, setImageURL] = useState(user.imageURL ? user.imageURL : "");
+  const [error, setError] = useState("");
+
+  const classes = useStyles();
+
+  useEffect(() => {
+    console.log(firstName, lastName, email, imageURL);
+  }, [firstName, lastName, email, imageURL]);
+  async function onSubmit(event) {
+    event.preventDefault();
+    try {
+      update(
+        {
+          id: user.id,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          imageURL: imageURL,
+        },
+        history.push
+      );
+    } catch (exception) {
+      setError({ error: exception.response.data.message });
+    }
+  }
+
+  return (
+    <Paper className={classes.root}>
+      <Grid container direction="column" alignItems="center">
+        <Grid>
+          <Typography className={classes.center} variant="h4">
+            User Profile
+          </Typography>
+          <img src={imageURL} />
+        </Grid>
+        <br />
+        <Grid className="profile">
+          {user.admin === true && (
+            <Grid container justify="space-evenly">
+              <Button variant="outlined" className="link-button" to="/listings">
+                Manage Products
+              </Button>
+              <Button variant="outlined" className="link-button" to="/userlist">
+                Manage Users
+              </Button>
+              <Button
+                variant="outlined"
+                className="link-button"
+                to="/orderlist"
+              >
+                Manage Orders
+              </Button>
+            </Grid>
+          )}
+          <br />
+          <Grid container direction="column" alignItems="center">
+            <Typography variant="subtitle1" className={classes.text}>
+              Status: {user.admin === true ? "Admin" : "User"}
+            </Typography>
+            <br />
+            <Grid
+              container
+              justify="space-between"
+              alignItem="center"
+              className={classes.profileInfo}
+            >
+              <Typography variant="subtitle1" className={classes.text}>
+                First Name:
+              </Typography>
+              <TextField
+                size="small"
+                variant="outlined"
+                value={firstName}
+                onChange={(event) => setFirstName(event.target.value)}
+              />
+            </Grid>
+            <Grid
+              container
+              justify="space-between"
+              className={classes.profileInfo}
+            >
+              <Typography variant="subtitle1" className={classes.text}>
+                Last Name:
+              </Typography>
+              <TextField
+                size="small"
+                variant="outlined"
+                value={lastName}
+                onChange={(event) => setLastName(event.target.value)}
+              />
+            </Grid>
+            <Grid
+              container
+              justify="space-between"
+              className={classes.profileInfo}
+            >
+              <Typography variant="subtitle1" className={classes.text}>
+                Email:
+              </Typography>
+              <TextField
+                size="small"
+                variant="outlined"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </Grid>
+            <Grid
+              container
+              justify="space-between"
+              className={classes.profileInfo}
+            >
+              <Typography variant="subtitle1" className={classes.text}>
+                imageURL:
+              </Typography>
+              <TextField
+                size="small"
+                variant="outlined"
+                value={imageURL}
+                onChange={(event) => setImageURL(event.target.value)}
+              />
+            </Grid>
+            <br />
+            <Button
+              variant="filled"
+              onClick={onSubmit}
+              disabled={
+                firstName === user.firstName &&
+                lastName === user.lastName &&
+                email === user.email &&
+                imageURL === user.imageURL
+              }
+            >
+              Update Profile
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Paper>
+  );
+};
+
+const mapStateToProps = ({ user }) => {
+  return {
+    user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    update: (user, push) => dispatch(updateProfile(user, push)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Account);

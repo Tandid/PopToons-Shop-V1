@@ -139,7 +139,7 @@ const Navbar = ({ handleClick, isLoggedIn, name, cartOrderItems }) => {
                             <MenuItem
                               onClick={handleClose}
                               component="a"
-                              href="/profile"
+                              href="/account"
                             >
                               Account
                             </MenuItem>
