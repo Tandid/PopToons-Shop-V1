@@ -47,7 +47,7 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
-const Navbar = ({ handleClick, isLoggedIn, name, cartOrderItems }) => {
+const Navbar = ({ handleClick, isLoggedIn, name, cartOrderItems, user }) => {
   const classes = useStyles();
   // const cartTotal = cartOrderItems.reduce((val, prod) => {
   //   return (val += prod.quantity);
@@ -112,7 +112,7 @@ const Navbar = ({ handleClick, isLoggedIn, name, cartOrderItems }) => {
                 aria-controls={open ? "menu-list-grow" : undefined}
                 aria-haspopup="true"
                 onClick={handleToggle}
-                label={isLoggedIn ? `Hello, ${name}` : `Hello, Guest`}
+                label={isLoggedIn ? `Hello, ${user.firstName}` : `Hello, Guest`}
               />
               <Popper
                 open={open}
@@ -209,6 +209,7 @@ const mapState = ({ user, orders, orderItems }) => {
     name: user.name,
     cart,
     orderItems,
+    user,
     // cartOrderItems,
   };
 };
