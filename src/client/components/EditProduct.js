@@ -80,8 +80,8 @@ const EditProduct = ({ product, history, update, match, getProduct }) => {
   }
 
   useEffect(() => {
-    const productId = match.params.id;
-    getProduct(productId);
+    // const productId = match.params.id;
+    // getProduct(productId);
     console.log(
       product.title,
       product.description,
@@ -98,7 +98,7 @@ const EditProduct = ({ product, history, update, match, getProduct }) => {
             <Grid container direction="row" alignItems="center">
               <Grid container direction="column" alignItems="center">
                 <Typography className={classes.center} variant="h4">
-                  Create New Product
+                  Edit Product
                 </Typography>
                 <br />
                 <img

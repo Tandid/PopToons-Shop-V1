@@ -17,6 +17,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import AddProduct from "./AddProduct";
+import EditProduct from "./EditProduct";
 
 const columns = [
   { id: "id", label: "Product ID", minWidth: 170 },
@@ -119,15 +120,14 @@ const Listings = ({ products, removeProduct }) => {
                         <TableCell key={column.id} align={column.align}>
                           {value}
                           {column.id === "edit" && (
-                            <IconButton>
+                            <IconButton href={`/products/${prod.id}/edit`}>
                               <AddCircleIcon />
                             </IconButton>
                           )}
                           {column.id === "remove" && (
                             <IconButton>
-                              <HighlightOffIcon
-                              // onClick={removeProduct(prod.id)}
-                              />
+                              <HighlightOffIcon />
+                              {/* onClick={removeProduct(prod.id)} */}
                             </IconButton>
                           )}
                         </TableCell>

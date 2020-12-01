@@ -16,6 +16,7 @@ import {
   UserList,
   OrderListing,
   AddProduct,
+  EditProduct,
 } from "./client/components/index";
 import { me, getProducts, getUsers } from "./client/store";
 import { getOrderItems } from "./client/store/orderItems";
@@ -40,7 +41,7 @@ class Routes extends Component {
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
         <Route exact path="/products" component={Products} />
-        <Route path="/products/:id" component={ProductDetails} />
+        <Route exact path="/products/:id" component={ProductDetails} />
         <Route path="/cart" component={Cart} />
         <Route path="/orders" component={Orders} />
         <Route path="/checkout" component={Checkout} />
@@ -51,7 +52,7 @@ class Routes extends Component {
             <Route exact path="/listings" component={Listings} />
             <Route exact path="/userlist" component={UserList} />
             <Route exact path="/orderlist" component={OrderListing} />
-            {/* <Route exact path="/products/:id/edit" component={EditProduct} /> */}
+            <Route exact path="/products/:id/edit" component={EditProduct} />
             <Route exact path="/newProduct" component={AddProduct} />
             {/* Routes placed here are only available after logging in */}
           </Switch>
