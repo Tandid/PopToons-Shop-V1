@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getProducts, removeProduct } from "../store";
@@ -16,6 +16,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
+import AddProduct from "./AddProduct";
 
 const columns = [
   { id: "id", label: "Product ID", minWidth: 170 },
@@ -68,8 +69,10 @@ const useStyles = makeStyles({
 
 const Listings = ({ products, removeProduct }) => {
   const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  useEffect(() => {}, [page, rowsPerPage]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -85,6 +88,9 @@ const Listings = ({ products, removeProduct }) => {
       <Typography className={classes.center} variant="h4">
         Manage Products
       </Typography>
+      <IconButton href="/newProduct">
+        <AddCircleIcon />
+      </IconButton>
       <br />
       <TableContainer className={classes.container}>
         <Table Listings>
