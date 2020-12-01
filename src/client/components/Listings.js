@@ -125,9 +125,12 @@ const Listings = ({ products, removeProduct }) => {
                             </IconButton>
                           )}
                           {column.id === "remove" && (
-                            <IconButton>
+                            <IconButton
+                              onClick={() => {
+                                removeProduct(prod.id);
+                              }}
+                            >
                               <HighlightOffIcon />
-                              {/* onClick={removeProduct(prod.id)} */}
                             </IconButton>
                           )}
                         </TableCell>
