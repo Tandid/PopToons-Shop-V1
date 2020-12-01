@@ -12,3 +12,4 @@ export { default as Account } from "./Account.js";
 export { default as Listings } from "./Listings.js";
 export { default as UserList } from "./UserList.js";
 export { default as OrderListing } from "./OrderListing.js";
+export { default as AddProduct } from "./AddProduct.js";
