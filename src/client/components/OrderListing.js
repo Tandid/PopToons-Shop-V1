@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProducts, removeProduct } from "../store";
+import { updateOrder } from "../store/orders";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -78,7 +78,8 @@ const OrderListing = ({
   users,
   orders,
   orderItems,
-  removeProduct,
+
+  updateOrder,
 }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -126,15 +127,35 @@ const OrderListing = ({
                         <TableCell key={column.id} align={column.align}>
                           {value}
                           {column.id === "completeOrder" && (
-                            <IconButton>
+                            <IconButton
+                              disabled={order.status !== "accepted"}
+                              onClick={() =>
+                                updateOrder(
+                                  {
+                                    id: order.id,
+                                    status: "completed",
+                                  },
+                                  () => {}
+                                )
+                              }
+                            >
                               <AddCircleIcon />
                             </IconButton>
                           )}
                           {column.id === "cancelOrder" && (
-                            <IconButton>
-                              <HighlightOffIcon
-                              // onClick={removeProduct(prod.id)}
-                              />
+                            <IconButton
+                              disabled={order.status !== "accepted"}
+                              onClick={() =>
+                                updateOrder(
+                                  {
+                                    id: order.id,
+                                    status: "canceled",
+                                  },
+                                  () => {}
+                                )
+                              }
+                            >
+                              <HighlightOffIcon />
                             </IconButton>
                           )}
                         </TableCell>
@@ -165,7 +186,7 @@ const mapStateToProps = ({ products, users, orders, orderItems }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeProduct: (id) => dispatch(removeProduct(id)),
+    updateOrder: (order, push) => dispatch(updateOrder(order, push)),
   };
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProducts, removeProduct } from "../store";
+import { removeUser, updateUser, getUsers } from "../store";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -68,7 +68,7 @@ const useStyles = makeStyles({
   },
 });
 
-const UserList = ({ users, removeProduct }) => {
+const UserList = ({ users, remove, makeOrRemoveAdmin }) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -118,15 +118,21 @@ const UserList = ({ users, removeProduct }) => {
                             ? "Admin"
                             : "User"} */}
                           {column.id === "updateStatus" && (
-                            <IconButton>
+                            <IconButton
+                              onClick={() => {
+                                makeOrRemoveAdmin(user.id);
+                              }}
+                            >
                               <AddCircleIcon />
                             </IconButton>
                           )}
                           {column.id === "remove" && (
-                            <IconButton>
-                              <HighlightOffIcon
-                              // onClick={removeProduct(prod.id)}
-                              />
+                            <IconButton
+                              onClick={() => {
+                                remove(user.id);
+                              }}
+                            >
+                              <HighlightOffIcon />
                             </IconButton>
                           )}
                         </TableCell>
@@ -157,7 +163,8 @@ const mapStateToProps = ({ users }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeProduct: (id) => dispatch(removeProduct(id)),
+    remove: (id) => dispatch(removeUser(id)),
+    makeOrRemoveAdmin: (user) => dispatch(updateUser(user)),
   };
 };
 
