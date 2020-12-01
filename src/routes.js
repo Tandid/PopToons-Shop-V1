@@ -18,9 +18,17 @@ import {
   EditProduct,
 } from "./client/components/index";
 import { me, getProducts, getUsers } from "./client/store";
-import { getOrderItems } from "./client/store/orderItems";
-import { getOrders } from "./client/store/orders";
+import {
+  getOrderItems,
+  orderItems,
+  deleteOrderItem,
+  createOrderItem,
+  updateOrderItem,
+} from "./client/store/orderItems";
+import { getOrders, createOrder, updateOrder } from "./client/store/orders";
 import { useHistory } from "react-router-dom";
+import { createUser } from "./client/store/user";
+import { v4 as uuidv4 } from "uuid";
 
 class Routes extends Component {
   constructor() {
@@ -30,6 +38,101 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
   }
+
+  componentDidUpdate(prevProps) {
+    if (!this.props.user.id && !localStorage.guestId) {
+      this.createGuestUser();
+    }
+
+    if (this.props.isLoggedIn && !prevProps.isLoggedIn) {
+      this.mergeCart();
+    }
+  }
+
+  async createGuestUser() {
+    const guestId = await uuidv4();
+    await localStorage.setItem("guestId", guestId);
+    await this.props.createUser({ id: guestId });
+    await this.props.createGuestCart({ userId: guestId });
+  }
+
+  async mergeCart() {
+    await this.props.loadUser();
+    await this.props.loadOrders();
+
+    const { orders, orderItems, user, products } = this.props;
+
+    const userCart = await orders.find(
+      (order) => order.userId === user.id && order.status === "cart"
+    );
+
+    const guestCart = await orders.find(
+      (order) =>
+        order.userId === localStorage.getItem("guestId") &&
+        order.status === "cart"
+    );
+
+    const userOrderItems = await orderItems.filter(
+      (orderItem) => orderItem.orderId === userCart.id
+    );
+
+    const guestOrderItems = await orderItems.filter(
+      (orderItem) => orderItem.orderId === guestCart.id
+    );
+
+    let guestOrderItemsPrice = 0;
+    await guestOrderItems.forEach((guestOrderItem) => {
+      guestOrderItemsPrice =
+        guestOrderItemsPrice +
+        parseFloat(
+          products.find((product) => product.id === guestOrderItem.productId)
+            .price
+        ) *
+          guestOrderItem.quantity;
+
+      const existingOrderItem = userOrderItems.find(
+        (userOrderItem) =>
+          userOrderItem.productId === guestOrderItem.productId &&
+          userOrderItem.orderId === userCart.id
+      );
+
+      if (!existingOrderItem) {
+        this.props.newOrderItem({
+          productId: guestOrderItem.productId,
+          orderId: userCart.id,
+          quantity: guestOrderItem.quantity,
+        });
+      } else {
+        this.props.incrementOrderItem({
+          productId: guestOrderItem.productId,
+          orderId: userCart.id,
+          quantity: existingOrderItem.quantity + guestOrderItem.quantity,
+        });
+      }
+    });
+
+    await this.props.updateTotalPrice(
+      {
+        id: guestCart.id,
+        totalPrice: 0,
+      },
+      () => {}
+    );
+
+    await this.props.updateTotalPrice(
+      {
+        id: userCart.id,
+        totalPrice:
+          parseFloat(userCart.totalPrice) + parseFloat(guestOrderItemsPrice),
+      },
+      () => {}
+    );
+
+    await guestOrderItems.forEach((orderItem) =>
+      this.props.removeFromGuestCart(orderItem)
+    );
+  }
+
   render() {
     const { isLoggedIn } = this.props;
     const { user } = this.props;
@@ -82,6 +185,14 @@ const mapDispatch = (dispatch) => {
       dispatch(getOrders());
       dispatch(getOrderItems());
     },
+    createUser: (user) => dispatch(createUser(user)),
+    createGuestCart: (order) => dispatch(createOrder(order)),
+    removeFromGuestCart: (orderItem) => dispatch(deleteOrderItem(orderItem)),
+    updateTotalPrice: (order, push) => dispatch(updateOrder(order, push)),
+    newOrderItem: (orderItem) => dispatch(createOrderItem(orderItem)),
+    incrementOrderItem: (orderItem) => dispatch(updateOrderItem(orderItem)),
+    loadUser: () => dispatch(me()),
+    loadOrders: () => dispatch(getOrders()),
   };
 };
 
