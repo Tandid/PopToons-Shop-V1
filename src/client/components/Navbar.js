@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   blue: theme.palette.blue,
+  nav: {
+    zIndex: "9999",
+  },
 }));
 
 const StyledBadge = withStyles((theme) => ({
@@ -90,8 +93,8 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar style={{ margin: 0 }} position="static">
-        <Toolbar>
+      <AppBar position="static">
+        <Toolbar className={classes.nav}>
           <Grid container justify="space-between">
             <Tab label="Funko Pop Shop" component={Link} to="/" />
             <Grid justify="space-around">
@@ -136,6 +139,7 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
                           <MenuList
                             autoFocusItem={open}
                             onKeyDown={handleListKeyDown}
+                            className={classes.menuList}
                           >
                             <MenuItem
                               onClick={handleClose}

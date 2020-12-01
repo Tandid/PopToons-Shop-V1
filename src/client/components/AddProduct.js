@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 
   backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
+    zIndex: "theme.zIndex.drawer + 1",
     color: "#000",
   },
 });
@@ -60,10 +60,6 @@ const AddProduct = ({
       setError({ error: exception.response.data.message });
     }
   }
-
-  //   const handleChange = (event) => {
-  //     setValue(event.target.value);
-  //   };
 
   useEffect(() => {
     console.log(title, description, imageURL, price);
