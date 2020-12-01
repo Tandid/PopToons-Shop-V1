@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { createOrderItem, updateOrderItem } from "../store/orderItems";
@@ -12,7 +12,10 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { ThemeProvider } from "@material-ui/styles";
+import ProductOverlay from "./ProductOverlay.js";
+
 import theme from "../theme";
+import { Backdrop } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
       transform: "scale(1.05)",
     },
   },
+  backdrop: {
+    zIndex: "1",
+    color: "#000",
+  },
 }));
 
 const ProductCard = ({
@@ -44,6 +51,8 @@ const ProductCard = ({
   updateTotalPrice,
   cart,
 }) => {
+  const [open, setOpen] = useState(false);
+
   const classes = useStyles();
 
   async function addToCart(event) {
@@ -84,7 +93,14 @@ const ProductCard = ({
         <CardHeader title={title} subheader={description} />
         <Typography variant="h6">${price}.00</Typography>
         <CardContent>
-          <Button variant="contained" color="black" href={`/products/${id}`}>
+          <Button
+            variant="contained"
+            color="black"
+            onClick={() => {
+              setOpen(!open);
+            }}
+          >
+            {" "}
             View Product
           </Button>
           <Button onClick={addToCart} variant="contained" color="primary">
@@ -92,6 +108,24 @@ const ProductCard = ({
           </Button>
         </CardContent>
       </Card>
+      {open === true ? (
+        <Backdrop
+          className={classes.backdrop}
+          open={open}
+          onClick={() => {
+            setOpen(false);
+          }}
+        >
+          <ProductOverlay
+            title={title}
+            imageURL={imageURL}
+            price={price}
+            description={description}
+          />
+        </Backdrop>
+      ) : (
+        ""
+      )}
     </ThemeProvider>
   );
 };
