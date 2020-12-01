@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "5%",
     paddingBottom: "2%",
   },
+  profileImage: {
+    height: "500px",
+  },
   center: {
     display: "flex",
     justifyContent: "center",
@@ -65,13 +68,16 @@ const Account = ({ user, update, history }) => {
 
   return (
     <Paper className={classes.root}>
-      <Grid container direction="column" alignItems="center">
-        <Grid>
-          <Typography className={classes.center} variant="h4">
-            User Profile
-          </Typography>
-          <img src={imageURL} />
-        </Grid>
+      <Typography className={classes.center} variant="h4">
+        User Profile
+      </Typography>
+      <Grid
+        container
+        direction="row"
+        justify="space-evenly"
+        alignItems="center"
+      >
+        <img className={classes.profileImage} src={imageURL} alt={imageURL} />
         <br />
         <Grid className="profile">
           {user.admin === true && (
@@ -171,9 +177,9 @@ const Account = ({ user, update, history }) => {
               variant="filled"
               onClick={onSubmit}
               disabled={
-                firstName === user.firstName &&
-                lastName === user.lastName &&
-                email === user.email &&
+                firstName === user.firstName ||
+                lastName === user.lastName ||
+                email === user.email ||
                 imageURL === user.imageURL
               }
             >
