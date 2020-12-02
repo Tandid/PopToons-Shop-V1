@@ -32,6 +32,7 @@
     "redux-thunk": "^2.3.0",
     "sequelize": "^6.3.5",
     "socket.io": "^3.0.1",
+    "stripe": "^8.126.0",
     "uuid": "^8.3.1",
     "web-vitals": "^0.2.4"
   },
