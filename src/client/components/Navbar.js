@@ -53,10 +53,11 @@ const StyledBadge = withStyles((theme) => ({
 
 const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
   const classes = useStyles();
-  // const cartTotal = cartOrderItems.reduce((val, prod) => {
-  //   return (val += prod.quantity);
-  // }, 0);
-  const cartTotal = 10;
+  const cartTotal = cartOrderItems.length
+    ? cartOrderItems.reduce((val, prod) => {
+        return (val += prod.quantity);
+      }, 0)
+    : 0;
 
   const [open, setOpen] = React.useState(false);
 
@@ -205,11 +206,9 @@ const mapState = ({ user, orders, orderItems }) => {
           order.userId === localStorage.getItem("guestId")
       );
 
-  console.log(cart);
-
-  // const cartOrderItems = orderItems.filter(
-  //   (orderItem) => orderItem.orderId === cart.id
-  // );
+  const cartOrderItems = cart
+    ? orderItems.filter((orderItem) => orderItem.orderId === cart.id)
+    : 0;
 
   return {
     isLoggedIn: !!user.id,
@@ -217,7 +216,7 @@ const mapState = ({ user, orders, orderItems }) => {
     cart,
     orderItems,
     user,
-    // cartOrderItems,
+    cartOrderItems,
   };
 };
 
