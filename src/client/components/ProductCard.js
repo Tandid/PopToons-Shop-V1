@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "80%",
     backgroundSize: "contain",
     backgroundPosition: "center",
+    transition: "all ease 300ms",
     "&:hover": {
       transform: "scale(1.05)",
     },
