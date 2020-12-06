@@ -136,7 +136,7 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
                   badgeContent={cartTotal ? cartTotal : "0"}
                   color="secondary"
                 >
-                  <ShoppingCartIcon color="secondary" />
+                  <ShoppingCartIcon color="white" />
                 </StyledBadge>
               </IconButton>
               <Tab
