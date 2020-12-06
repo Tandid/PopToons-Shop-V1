@@ -39,6 +39,13 @@ const useStyles = makeStyles((theme) => ({
   nav: {
     zIndex: "9999",
   },
+  tab: {
+    color: "white",
+    fontWeight: "bold",
+    "&:hover": {
+      transform: "scale(1.10)",
+    },
+  },
 }));
 
 const StyledBadge = withStyles((theme) => ({
@@ -97,14 +104,34 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
       <AppBar position="static">
         <Toolbar className={classes.nav}>
           <Grid container justify="space-between">
-            <Tab label="Funko Pop Shop" component={Link} to="/" />
+            <Tab
+              className={classes.tab}
+              label="Funko Pop Shop"
+              component={Link}
+              to="/"
+            />
             <Grid justify="space-around">
-              <Tab label="Products" component={Link} to="/products" />
+              <Tab
+                className={classes.tab}
+                label="Products"
+                component={Link}
+                to="/products"
+              />
               {isLoggedIn && (
-                <Tab label="Order History" component={Link} to="/orders" />
+                <Tab
+                  className={classes.tab}
+                  label="Order History"
+                  component={Link}
+                  to="/orders"
+                />
               )}
 
-              <IconButton component={Link} to="/cart" aria-label="cart">
+              <IconButton
+                className={classes.tab}
+                component={Link}
+                to="/cart"
+                aria-label="cart"
+              >
                 <StyledBadge
                   badgeContent={cartTotal ? cartTotal : "0"}
                   color="secondary"
@@ -113,6 +140,7 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
                 </StyledBadge>
               </IconButton>
               <Tab
+                className={classes.tab}
                 ref={anchorRef}
                 aria-controls={open ? "menu-list-grow" : undefined}
                 aria-haspopup="true"
