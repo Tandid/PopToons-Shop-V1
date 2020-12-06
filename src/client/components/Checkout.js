@@ -35,10 +35,13 @@ const useStyles = makeStyles((theme) => ({
   leftContainer: {
     padding: "2%",
     width: "60%",
-    minHeight: "600px",
+  },
+  overflow: {
+    overflow: "scroll",
+    maxHeight: "400px",
   },
   rightContainer: {
-    minHeight: "600px",
+    minHeight: "500px",
     padding: "2%",
     width: "40%",
   },
@@ -130,13 +133,11 @@ const Checkout = ({
               <Typography className={classes.center} variant="h4">
                 Items in Cart
               </Typography>
-              <div>
-                <ul>
-                  {cartOrderItems.map((orderItem) => (
-                    <ProductList key={Math.random()} {...orderItem} />
-                  ))}
-                </ul>
-              </div>
+              <Grid className={classes.overflow}>
+                {cartOrderItems.map((orderItem) => (
+                  <ProductList key={Math.random()} {...orderItem} />
+                ))}
+              </Grid>
             </div>
             <Paper className={classes.rightContainer}>
               <Typography className={classes.center} variant="h4">

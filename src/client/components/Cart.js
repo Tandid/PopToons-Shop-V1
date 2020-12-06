@@ -19,6 +19,10 @@ const useStyles = makeStyles({
     marginBottom: "3%",
     padding: "2%",
   },
+  cartItems: {
+    overflow: "scroll",
+    maxHeight: "400px",
+  },
   center: {
     display: "flex",
     justifyContent: "center",
@@ -78,11 +82,11 @@ const Cart = ({
           <Typography className={classes.center} variant="h4">
             Cart
           </Typography>
-          <ul>
+          <Grid className={classes.cartItems}>
             {cartOrderItems.map((orderItem) => (
               <ProductList key={Math.random()} {...orderItem} />
             ))}
-          </ul>
+          </Grid>
           <Typography className={classes.center} variant="h6">
             Total Price: ${Math.abs(parseFloat(cart.totalPrice).toFixed(2))}{" "}
           </Typography>
