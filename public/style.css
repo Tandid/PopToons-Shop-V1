@@ -25,3 +25,7 @@ body {
   width: 70px;
   object-fit: contain;
 }
+
+.logo {
+  width: 200px;
+}

@@ -42,6 +42,15 @@ const useStyles = makeStyles((theme) => ({
   tab: {
     color: "white",
     fontWeight: "bold",
+    transition: "all ease 300ms",
+    "&:hover": {
+      transform: "scale(1.10)",
+    },
+  },
+  logo: {
+    color: "white",
+    fontWeight: "bold",
+    transition: "all ease 300ms",
     "&:hover": {
       transform: "scale(1.10)",
     },
@@ -104,13 +113,15 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
       <AppBar position="static">
         <Toolbar className={classes.nav}>
           <Grid container justify="space-between">
-            <Tab
+            <Link
               className={classes.logo}
-              label="Funko Pop Shop"
-              component={Link}
+              // label="Funko Pop Shop"
+              // component={Link}
               to="/"
-            />
-            <Grid justify="space-around">
+            >
+              <img className="logo" src="images/logo.png" alt="logo" />
+            </Link>
+            <Grid className={classes.root} justify="space-around">
               <Tab
                 className={classes.tab}
                 label="Products"
