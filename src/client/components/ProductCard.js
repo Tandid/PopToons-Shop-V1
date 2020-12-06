@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { createOrderItem, updateOrderItem } from "../store/orderItems";
 import { updateOrder } from "../store/orders";
 
@@ -96,7 +95,6 @@ const ProductCard = ({
         <CardContent>
           <Button
             variant="contained"
-            color="black"
             onClick={() => {
               setOpen(!open);
             }}

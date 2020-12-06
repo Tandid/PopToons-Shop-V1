@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { getProducts } from "../store";
 import ProductCard from "./ProductCard.js";
 import { Typography, Grid } from "@material-ui/core/";
+import Pagination from "@material-ui/lab/Pagination";
+
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,12 +16,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Products = ({ products }) => {
-  // onChange(ev) {
-  //   this.setState({
-  //     category: ev.target.value,
-  //   });
-  // }
   const classes = useStyles();
+  const [page, setPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(12);
+
+  useEffect(() => {}, [page, productsPerPage]);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
   return (
     <div>
@@ -27,10 +32,23 @@ const Products = ({ products }) => {
         <Typography variant="h4" className={classes.center}>
           Products
         </Typography>
+        <Pagination
+          className={classes.center}
+          count={3}
+          variant="outlined"
+          shape="rounded"
+          onChange={handleChangePage}
+          size="large"
+        />
         <ul className="card-wrapper">
-          {products.map((product) => {
-            return <ProductCard key={product.id} {...product} />;
-          })}
+          {products
+            .slice(
+              (page - 1) * productsPerPage,
+              (page - 1) * productsPerPage + productsPerPage
+            )
+            .map((product) => {
+              return <ProductCard key={product.id} {...product} />;
+            })}
         </ul>
       </Grid>
     </div>

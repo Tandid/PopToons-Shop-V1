@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { updateProfile } from "../store";
 import { Paper, Typography, TextField, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -41,7 +40,7 @@ const Account = ({ user, update, history }) => {
   const [lastName, setLastName] = useState(user.lastName ? user.lastName : "");
   const [email, setEmail] = useState(user.email ? user.email : "");
   const [imageURL, setImageURL] = useState(user.imageURL ? user.imageURL : "");
-  const [error, setError] = useState("");
+  const [setError] = useState("");
 
   const classes = useStyles();
 
