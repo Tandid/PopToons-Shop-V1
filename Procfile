@@ -1,1 +1,1 @@
- web: npm run seed && npm start
+ web: npm run seed && npm run server && npm start
