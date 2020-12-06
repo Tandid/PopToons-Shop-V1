@@ -5,7 +5,8 @@ import { getOrders } from "../store/orders";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
+import { Paper, Grid } from "@material-ui/core/";
+import Footer from "./Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,17 +34,22 @@ const Orders = ({ fetchOrders, orders, user }) => {
   }, []);
 
   return (
-    <Paper className={classes.root}>
-      <Typography variant="h4" className={classes.center}>
-        Order History
-      </Typography>
-      <br />
-      {orders
-        .filter((order) => order.userId === user.id && order.status !== "cart")
-        .map((order) => (
-          <OrderCard key={order.id} {...order} />
-        ))}
-    </Paper>
+    <Grid>
+      <Paper className={classes.root}>
+        <Typography variant="h4" className={classes.center}>
+          Order History
+        </Typography>
+        <br />
+        {orders
+          .filter(
+            (order) => order.userId === user.id && order.status !== "cart"
+          )
+          .map((order) => (
+            <OrderCard key={order.id} {...order} />
+          ))}
+      </Paper>
+      <Footer title="Contact" description="Check out my portfolio here!" />
+    </Grid>
   );
 };
 

@@ -5,6 +5,7 @@ import { deleteOrderItem, getOrderItems } from "../store/orderItems";
 import { updateOrder } from "../store/orders";
 import { Paper, Typography, Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Footer from "./Footer";
 
 const useStyles = makeStyles({
   root: {
@@ -69,33 +70,36 @@ const Cart = ({
     return <h1>Loading...</h1>;
   } else {
     return (
-      <Paper className={classes.root}>
-        <Typography className={classes.center} variant="h4">
-          Cart
-        </Typography>
-        <ul>
-          {cartOrderItems.map((orderItem) => (
-            <ProductList key={Math.random()} {...orderItem} />
-          ))}
-        </ul>
-        <Typography className={classes.center} variant="h6">
-          Total Price: ${Math.abs(parseFloat(cart.totalPrice).toFixed(2))}{" "}
-        </Typography>
-        <br />
-        <br />
-        <Grid className={classes.center}>
-          <Button onClick={clearCart} variant="outlined">
-            Clear Cart
-          </Button>
-          <Button
-            variant="outlined"
-            href="/checkout"
-            disabled={!cartOrderItems.length}
-          >
-            Checkout
-          </Button>
-        </Grid>
-      </Paper>
+      <Grid>
+        <Paper className={classes.root}>
+          <Typography className={classes.center} variant="h4">
+            Cart
+          </Typography>
+          <ul>
+            {cartOrderItems.map((orderItem) => (
+              <ProductList key={Math.random()} {...orderItem} />
+            ))}
+          </ul>
+          <Typography className={classes.center} variant="h6">
+            Total Price: ${Math.abs(parseFloat(cart.totalPrice).toFixed(2))}{" "}
+          </Typography>
+          <br />
+          <br />
+          <Grid className={classes.center}>
+            <Button onClick={clearCart} variant="outlined">
+              Clear Cart
+            </Button>
+            <Button
+              variant="outlined"
+              href="/checkout"
+              disabled={!cartOrderItems.length}
+            >
+              Checkout
+            </Button>
+          </Grid>
+        </Paper>
+        <Footer title="Contact" description="Check out my portfolio here!" />
+      </Grid>
     );
   }
 };

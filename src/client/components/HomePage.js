@@ -19,12 +19,11 @@ const tutorialSteps = [
   {
     imgPath: "images/funko_banner.jpg",
   },
-  // {
-  //   imgPath: "images/funko.jpg",
-  // },
-
   {
     imgPath: "images/one_piece.jpg",
+  },
+  {
+    imgPath: "images/pop_dbz_banner.jpg",
   },
 ];
 
@@ -45,6 +44,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
   },
+  footer: {
+    width: "95%",
+    height: "200px",
+    margin: theme.spacing(3),
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+  },
   largePost: {
     objectFit: "contain",
     width: "95%",
@@ -54,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
   },
-  miniPost: {
+  miniPostOne: {
     width: theme.spacing(70),
     height: theme.spacing(100),
     backgroundRepeat: "no-repeat",
@@ -97,16 +104,20 @@ const HomePage = () => {
       </AutoPlaySwipeableViews>
       <FeaturedProducts />
       <br />
-      <Grid container justify="space-around">
+      {/* <Grid container justify="space-around">
         <Paper
           className={classes.largePost}
           style={{ backgroundImage: "url(images/footer.png)" }}
         />
         <Paper
-          className={classes.miniPost}
+          className={classes.miniPostOne}
           style={{ backgroundImage: "url(images/star_wars.jpg)" }}
         />
-      </Grid>
+      </Grid> */}
+      <div
+        className={classes.footer}
+        style={{ backgroundImage: "url(images/streetfighter.jpg)" }}
+      />
       <Footer title="Contact" description="Check out my portfolio here!" />
     </ThemeProvider>
   );

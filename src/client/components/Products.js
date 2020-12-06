@@ -4,6 +4,7 @@ import { getProducts } from "../store";
 import ProductCard from "./ProductCard.js";
 import { Typography, Grid } from "@material-ui/core/";
 import Pagination from "@material-ui/lab/Pagination";
+import Footer from "./Footer";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -60,6 +61,7 @@ const Products = ({ products }) => {
         />
         <br />
       </Grid>
+      <Footer title="Contact" description="Check out my portfolio here!" />
     </div>
   );
 };

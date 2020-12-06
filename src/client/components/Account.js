@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { updateProfile } from "../store";
 import { Paper, Typography, TextField, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Footer from "./Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,128 +67,131 @@ const Account = ({ user, update, history }) => {
   }
 
   return (
-    <Paper className={classes.root}>
-      <Typography className={classes.center} variant="h4">
-        User Profile
-      </Typography>
-      <Grid
-        container
-        direction="row"
-        justify="space-evenly"
-        alignItems="center"
-      >
-        <img className={classes.profileImage} src={imageURL} alt={imageURL} />
-        <br />
-        <Grid className="profile">
-          {user.admin === true && (
-            <Grid container justify="space-evenly">
-              <Button
-                variant="outlined"
-                className="link-button"
-                href="/listings"
-              >
-                Manage Products
-              </Button>
-              <Button
-                variant="outlined"
-                className="link-button"
-                href="/userlist"
-              >
-                Manage Users
-              </Button>
-              <Button
-                variant="outlined"
-                className="link-button"
-                href="/orderlist"
-              >
-                Manage Orders
-              </Button>
-            </Grid>
-          )}
+    <Grid>
+      <Paper className={classes.root}>
+        <Typography className={classes.center} variant="h4">
+          User Profile
+        </Typography>
+        <Grid
+          container
+          direction="row"
+          justify="space-evenly"
+          alignItems="center"
+        >
+          <img className={classes.profileImage} src={imageURL} alt={imageURL} />
           <br />
-          <Grid container direction="column" alignItems="center">
-            <Typography variant="subtitle1" className={classes.text}>
-              Status: {user.admin === true ? "Admin" : "User"}
-            </Typography>
+          <Grid className="profile">
+            {user.admin === true && (
+              <Grid container justify="space-evenly">
+                <Button
+                  variant="outlined"
+                  className="link-button"
+                  href="/listings"
+                >
+                  Manage Products
+                </Button>
+                <Button
+                  variant="outlined"
+                  className="link-button"
+                  href="/userlist"
+                >
+                  Manage Users
+                </Button>
+                <Button
+                  variant="outlined"
+                  className="link-button"
+                  href="/orderlist"
+                >
+                  Manage Orders
+                </Button>
+              </Grid>
+            )}
             <br />
-            <Grid
-              container
-              justify="space-between"
-              alignItem="center"
-              className={classes.profileInfo}
-            >
+            <Grid container direction="column" alignItems="center">
               <Typography variant="subtitle1" className={classes.text}>
-                First Name:
+                Status: {user.admin === true ? "Admin" : "User"}
               </Typography>
-              <TextField
-                size="small"
-                variant="outlined"
-                value={firstName}
-                onChange={(event) => setFirstName(event.target.value)}
-              />
+              <br />
+              <Grid
+                container
+                justify="space-between"
+                alignItem="center"
+                className={classes.profileInfo}
+              >
+                <Typography variant="subtitle1" className={classes.text}>
+                  First Name:
+                </Typography>
+                <TextField
+                  size="small"
+                  variant="outlined"
+                  value={firstName}
+                  onChange={(event) => setFirstName(event.target.value)}
+                />
+              </Grid>
+              <Grid
+                container
+                justify="space-between"
+                className={classes.profileInfo}
+              >
+                <Typography variant="subtitle1" className={classes.text}>
+                  Last Name:
+                </Typography>
+                <TextField
+                  size="small"
+                  variant="outlined"
+                  value={lastName}
+                  onChange={(event) => setLastName(event.target.value)}
+                />
+              </Grid>
+              <Grid
+                container
+                justify="space-between"
+                className={classes.profileInfo}
+              >
+                <Typography variant="subtitle1" className={classes.text}>
+                  Email:
+                </Typography>
+                <TextField
+                  size="small"
+                  variant="outlined"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </Grid>
+              <Grid
+                container
+                justify="space-between"
+                className={classes.profileInfo}
+              >
+                <Typography variant="subtitle1" className={classes.text}>
+                  imageURL:
+                </Typography>
+                <TextField
+                  size="small"
+                  variant="outlined"
+                  value={imageURL}
+                  onChange={(event) => setImageURL(event.target.value)}
+                />
+              </Grid>
+              <br />
+              <Button
+                variant="filled"
+                onClick={onSubmit}
+                disabled={
+                  firstName === user.firstName ||
+                  lastName === user.lastName ||
+                  email === user.email ||
+                  imageURL === user.imageURL
+                }
+              >
+                Update Profile
+              </Button>
             </Grid>
-            <Grid
-              container
-              justify="space-between"
-              className={classes.profileInfo}
-            >
-              <Typography variant="subtitle1" className={classes.text}>
-                Last Name:
-              </Typography>
-              <TextField
-                size="small"
-                variant="outlined"
-                value={lastName}
-                onChange={(event) => setLastName(event.target.value)}
-              />
-            </Grid>
-            <Grid
-              container
-              justify="space-between"
-              className={classes.profileInfo}
-            >
-              <Typography variant="subtitle1" className={classes.text}>
-                Email:
-              </Typography>
-              <TextField
-                size="small"
-                variant="outlined"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </Grid>
-            <Grid
-              container
-              justify="space-between"
-              className={classes.profileInfo}
-            >
-              <Typography variant="subtitle1" className={classes.text}>
-                imageURL:
-              </Typography>
-              <TextField
-                size="small"
-                variant="outlined"
-                value={imageURL}
-                onChange={(event) => setImageURL(event.target.value)}
-              />
-            </Grid>
-            <br />
-            <Button
-              variant="filled"
-              onClick={onSubmit}
-              disabled={
-                firstName === user.firstName ||
-                lastName === user.lastName ||
-                email === user.email ||
-                imageURL === user.imageURL
-              }
-            >
-              Update Profile
-            </Button>
           </Grid>
         </Grid>
-      </Grid>
-    </Paper>
+      </Paper>
+      <Footer title="Contact" description="Check out my portfolio here!" />
+    </Grid>
   );
 };
 
