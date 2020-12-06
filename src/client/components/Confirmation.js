@@ -2,13 +2,14 @@ import React, { Component, useEffect } from "react";
 import { connect } from "react-redux";
 import { getOrder } from "../store/orders";
 import { Paper, Typography, Button, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import theme from "../theme";
 
 const useStyles = makeStyles({
   root: {
     minHeight: "600px",
-    marginLeft: "5%",
-    marginRight: "5%",
+    marginLeft: "30%",
+    marginRight: "30%",
     marginTop: "3%",
     marginBottom: "3%",
     padding: "2%",
@@ -36,73 +37,74 @@ const Confirmation = ({ match, products, order, orderItems, loadOrder }) => {
       (orderItem) => orderItem.orderId === order.id
     );
     return (
-      <Paper className={classes.root}>
-        <Grid>
-          <Typography variant="h5" className={classes.center}>
-            Thank you for shopping with us!
-          </Typography>
-          <Typography variant="h5" className={classes.center}>
-            You will receive an email confirmation soon with shipping and
-            tracking details 😊
-          </Typography>
-          <Typography variant="h5" className={classes.center}>
-            Here is a summary of your order:
-          </Typography>
-          <br />
-        </Grid>
-        <Paper className={classes.receipt} key={Math.random()}>
+      <ThemeProvider theme={theme}>
+        <Paper className={classes.root}>
           <Grid>
-            <Typography>Order #: {order.id}</Typography>
-            <Typography>Status: {order.status.toUpperCase()}</Typography>
-          </Grid>
-          <Grid>
-            <ul>
-              {thisOrderItems.map((orderItem) => (
-                <Grid
-                  container
-                  direction="row"
-                  justify="space-around"
-                  key={Math.random()}
-                >
-                  {/* <img
-                    className="orderItems"
-                    alt="product img"
-                    src={
-                      products.find(
-                        (product) => product.id === orderItem.productId
-                      ).imageURL
-                    }
-                  /> */}
-                  <Typography>X{orderItem.quantity}</Typography>
-                  <Typography>
-                    {
-                      products.find(
-                        (product) => product.id === orderItem.productId
-                      ).title
-                    }
-                  </Typography>
-
-                  <Typography>
-                    $
-                    {
-                      products.find(
-                        (product) => product.id === orderItem.productId
-                      ).price
-                    }
-                  </Typography>
-                </Grid>
-              ))}
-            </ul>
-            <Typography>
-              Total Price: ${parseFloat(order.totalPrice).toFixed(2)}
+            <Typography variant="h5" className={classes.center}>
+              Thank you for shopping with us!
             </Typography>
+            <br />
+            <Typography variant="body1" className={classes.center}>
+              Products are expected to start shipping within 3-5 business days.
+              You will receive an email confirmation soon with shipping and
+              tracking details 😊
+            </Typography>
+            <br />
+            <Typography variant="h5" className={classes.center}>
+              Here is a summary of your order:
+            </Typography>
+            <br />
           </Grid>
+          <Paper className={classes.receipt} key={Math.random()}>
+            <Grid>
+              <Typography>Order #: {order.id}</Typography>
+              <Typography>Status: {order.status.toUpperCase()}</Typography>
+            </Grid>
+            <Grid>
+              <ul>
+                {thisOrderItems.map((orderItem) => (
+                  <Grid
+                    container
+                    direction="row"
+                    justify="space-around"
+                    key={Math.random()}
+                  >
+                    <Typography>x{orderItem.quantity}</Typography>
+                    <Typography>
+                      {
+                        products.find(
+                          (product) => product.id === orderItem.productId
+                        ).title
+                      }
+                    </Typography>
+
+                    <Typography>
+                      $
+                      {
+                        products.find(
+                          (product) => product.id === orderItem.productId
+                        ).price
+                      }
+                    </Typography>
+                  </Grid>
+                ))}
+              </ul>
+              <Typography>
+                Total Price: ${parseFloat(order.totalPrice).toFixed(2)}
+              </Typography>
+            </Grid>
+          </Paper>
+          <br />
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.center}
+            href="/"
+          >
+            Continue Shopping
+          </Button>
         </Paper>
-        <br />
-        <Button variant="outlined" className={classes.center} href="/">
-          Continue Shopping
-        </Button>
-      </Paper>
+      </ThemeProvider>
     );
   }
 };
