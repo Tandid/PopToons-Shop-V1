@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -9,9 +9,7 @@ import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 
 import { ThemeProvider } from "@material-ui/styles";
-import ProductCard from "./ProductCard.js";
-
-import theme from "../theme";
+import FeaturedProducts from "./FeaturedProducts.js";
 
 import Footer from "./Footer";
 
@@ -21,9 +19,9 @@ const tutorialSteps = [
   {
     imgPath: "images/funko_banner.jpg",
   },
-  {
-    imgPath: "images/funko.jpg",
-  },
+  // {
+  //   imgPath: "images/funko.jpg",
+  // },
 
   {
     imgPath: "images/one_piece.jpg",
@@ -32,7 +30,7 @@ const tutorialSteps = [
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    margin: theme.spacing(0),
+    width: "90%",
     marginTop: theme.spacing(2),
   },
   center: {
@@ -40,42 +38,40 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   banner: {
-    width: theme.spacing(170),
-    height: theme.spacing(60),
+    width: "95%",
+    height: "500px",
     margin: theme.spacing(3),
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
+    // objectFit: "contain",
   },
   largePost: {
-    width: theme.spacing(120),
-    height: theme.spacing(50),
+    width: "90%",
+    height: theme.spacing(60),
     marginBottom: theme.spacing(4),
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
   },
   miniPost: {
-    width: theme.spacing(50),
-    height: theme.spacing(50),
-    marginBottom: theme.spacing(4),
+    width: theme.spacing(70),
+    height: theme.spacing(100),
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
+    backgroundPosition: "center",
   },
 }));
 
-const HomePage = ({ products, randomProducts }) => {
+const HomePage = () => {
   const classes = useStyles();
-  // const { email } = props;
 
   const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
 
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-
-  // useEffect = () => {};
 
   return (
     <ThemeProvider theme={theme}>
@@ -99,43 +95,17 @@ const HomePage = ({ products, randomProducts }) => {
           </div>
         ))}
       </AutoPlaySwipeableViews>
-      <Grid>
-        {/* {randomProducts.map((product) => (
-          <ProductCard key={product.id} {...product} />
-        ))} */}
-      </Grid>
-      <Grid container justify="center" className={classes.root}>
-        {/* <Paper
-          className={classes.banner}
-          style={{ backgroundImage: "url(images/funko_banner.jpg)" }}
-        /> */}
-        {/* <Button className={classes.button} variant="contained" color="primary">
-            SHOP NOW
-            </Button> */}
-        {/* <Grid container justify="center">
-          <Paper
-            className={classes.largePost}
-            style={{ backgroundImage: "url(images/pop_dbz_banner.jpg)" }}
-          />
-          <Paper
-            className={classes.miniPost}
-            style={{ backgroundImage: "url(images/dbz_funko_pops.jpg)" }}
-          />
-        </Grid> */}
-        <Grid container justify="space-around">
-          <Paper
-            className={classes.miniPost}
-            style={{ backgroundImage: "url(images/civil_war.jpg)" }}
-          />
-          <Paper
-            className={classes.miniPost}
-            style={{ backgroundImage: "url(images/star_wars.jpg)" }}
-          />
-        </Grid>
-        {/* <Paper
-          className={classes.banner}
-          style={{ backgroundImage: "url(images/streetfighter_banner.jpg)" }}
-        /> */}
+      <FeaturedProducts />
+      <br />
+      <Grid container justify="space-around">
+        <Paper
+          className={classes.miniPost}
+          style={{ backgroundImage: "url(images/civil_war.jpg)" }}
+        />
+        <Paper
+          className={classes.miniPost}
+          style={{ backgroundImage: "url(images/star_wars.jpg)" }}
+        />
       </Grid>
       <Footer title="Contact" description="Check out my portfolio here!" />
     </ThemeProvider>
@@ -143,24 +113,9 @@ const HomePage = ({ products, randomProducts }) => {
 };
 
 const mapState = ({ user, products }) => {
-  // let randomProducts = [];
-  // let hash = {};
-  // const randomNum = (array) => {
-  //   let random = Math.floor(Math.random() * array.length);
-  //   hash[random] ? randomNum() : (hash[random] = random);
-  //   return random;
-  // };
-  // for (let i = 0; i < 3; i++) {
-  //   let randomIdx = randomNum(products);
-  //   let randomProd = products.find((product) => product.id === randomIdx);
-  //   randomProducts.push(randomProd);
-  //   console.log({ randomProducts: randomProducts });
-  // }
-
   return {
     email: user.email,
     products,
-    // randomProducts,
   };
 };
 
