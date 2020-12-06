@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { updateProfile } from "../store";
 import { Paper, Typography, TextField, Grid, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import Footer from "./Footer";
+import theme from "../theme";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,7 +68,7 @@ const Account = ({ user, update, history }) => {
   }
 
   return (
-    <Grid>
+    <ThemeProvider theme={theme}>
       <Paper className={classes.root}>
         <Typography className={classes.center} variant="h4">
           User Profile
@@ -84,23 +85,25 @@ const Account = ({ user, update, history }) => {
             {user.admin === true && (
               <Grid container justify="space-evenly">
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   className="link-button"
                   href="/listings"
+                  color="primary"
                 >
                   Manage Products
                 </Button>
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   className="link-button"
                   href="/userlist"
                 >
                   Manage Users
                 </Button>
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   className="link-button"
                   href="/orderlist"
+                  color="primary"
                 >
                   Manage Orders
                 </Button>
@@ -175,12 +178,13 @@ const Account = ({ user, update, history }) => {
               </Grid>
               <br />
               <Button
-                variant="filled"
+                variant="contained"
                 onClick={onSubmit}
+                color="secondary"
                 disabled={
-                  firstName === user.firstName ||
-                  lastName === user.lastName ||
-                  email === user.email ||
+                  firstName === user.firstName &&
+                  lastName === user.lastName &&
+                  email === user.email &&
                   imageURL === user.imageURL
                 }
               >
@@ -191,7 +195,7 @@ const Account = ({ user, update, history }) => {
         </Grid>
       </Paper>
       <Footer title="Contact" description="Check out my portfolio here!" />
-    </Grid>
+    </ThemeProvider>
   );
 };
 
