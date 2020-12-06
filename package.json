@@ -1,7 +1,11 @@
 {
   "name": "funkopop_shop",
   "version": "0.1.0",
+  "description": "Funko Pop E-Commerce Shop",
   "private": true,
+  "engines": {
+    "node": "13.12"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
