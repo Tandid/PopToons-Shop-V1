@@ -6,8 +6,10 @@ import {
   getOrderItems,
 } from "../store/orderItems";
 import { updateOrder } from "../store/orders";
-import { Grid, Button, IconButton, Typography } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { Grid, IconButton, Typography } from "@material-ui/core";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 
 const ProductList = ({
   orderId,
@@ -107,22 +109,32 @@ const ProductList = ({
     return (
       <div>
         <Grid container justify="space-around" alignItems="center">
-          <img className="cartItems" src={product.imageURL} />
+          <img className="cartItems" src={product.imageURL} alt="img" />
           <Grid>
             <Typography variant="h6">{product.title}</Typography>
           </Grid>
           <Typography variant="h6">x {quantity}</Typography>
           <Grid>
-            <Button variant="outlined" onClick={subtract} value="-">
-              -
-            </Button>
-            <Button variant="outlined" onClick={add} value="+">
-              +
-            </Button>
+            <IconButton
+              variant="outlined"
+              onClick={subtract}
+              color="secondary"
+              value="-"
+            >
+              <RemoveCircleIcon />
+            </IconButton>
+            <IconButton
+              variant="outlined"
+              onClick={add}
+              color="secondary"
+              value="+"
+            >
+              <AddCircleIcon />
+            </IconButton>
           </Grid>
           <Typography variant="h6">${product.price * quantity}</Typography>
           <IconButton>
-            <DeleteIcon onClick={destroy} />
+            <HighlightOffIcon onClick={destroy} fontSize="large" />
           </IconButton>
         </Grid>
         <br />

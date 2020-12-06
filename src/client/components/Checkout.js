@@ -7,13 +7,14 @@ import axios from "axios";
 import { me } from "../store";
 import StripeCheckout from "react-stripe-checkout";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Footer from "./Footer";
+import theme from "../theme";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   rightContainer: {
     minHeight: "600px",
     padding: "2%",
-    width: "35%",
+    width: "40%",
   },
 }));
 
@@ -121,11 +122,11 @@ const Checkout = ({
       (orderItem) => orderItem.orderId === cart.id
     );
     return (
-      <Grid>
+      <ThemeProvider theme={theme}>
         <Paper className={classes.root}>
           {/* <form onSubmit={onSubmit}> */}
           <Grid container direction="row" justify="space-evenly">
-            <Paper className={classes.leftContainer}>
+            <div className={classes.leftContainer}>
               <Typography className={classes.center} variant="h4">
                 Items in Cart
               </Typography>
@@ -136,49 +137,73 @@ const Checkout = ({
                   ))}
                 </ul>
               </div>
-            </Paper>
+            </div>
             <Paper className={classes.rightContainer}>
               <Typography className={classes.center} variant="h4">
                 Shipping/Billing
               </Typography>
-              <Grid container direction="column" justify="space-between">
+              <br />
+              <Grid container direction="column">
                 <TextField
+                  size="small"
+                  variant="outlined"
                   value={firstName}
                   onChange={(event) => setFirstName(event.target.value)}
                   label="First Name"
                 />
+                <br />
                 <TextField
+                  size="small"
+                  variant="outlined"
                   value={lastName}
                   onChange={(event) => setLastName(event.target.value)}
                   label="Last Name"
                 />
+                <br />
                 <TextField
+                  size="small"
+                  variant="outlined"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   label="Email"
                 />
+                <br />
                 <TextField
+                  size="small"
+                  variant="outlined"
                   value={address}
                   onChange={(event) => setAddress(event.target.value)}
                   label="Address"
                 />
+                <br />
                 <Typography className={classes.center} variant="h4">
                   Payment Method{" "}
                 </Typography>
-                <Typography>
+                <br />
+                <Typography className={classes.center}>
                   Total Price: ${parseFloat(cart.totalPrice).toFixed(2)}
                 </Typography>
-                <Button variant="outlined" href="/cart">
-                  Edit Cart
-                </Button>
-                <StripeCheckout
-                  disabled={!firstName || !lastName || !email || !address}
-                  stripeKey="pk_test_E1dVa6505p5SZc6KIGv6yrQB00yOT20RJM"
-                  token={handleToken}
-                  email={email}
-                  amount={parseFloat(cart.totalPrice).toFixed(2) * 100}
-                  onSubmit={onSubmit}
-                />
+                <br />
+                <Grid align="center">
+                  <Button color="primary" variant="contained" href="/cart">
+                    Edit Cart
+                  </Button>
+                  <StripeCheckout
+                    stripeKey="pk_test_E1dVa6505p5SZc6KIGv6yrQB00yOT20RJM"
+                    token={handleToken}
+                    email={email}
+                    amount={parseFloat(cart.totalPrice).toFixed(2) * 100}
+                    onSubmit={onSubmit}
+                  >
+                    <Button
+                      disabled={!firstName || !lastName || !email || !address}
+                      color="secondary"
+                      variant="contained"
+                    >
+                      PAY WITH CARD
+                    </Button>
+                  </StripeCheckout>
+                </Grid>
               </Grid>
             </Paper>
           </Grid>
@@ -186,7 +211,7 @@ const Checkout = ({
           {/* </form> */}
         </Paper>
         <Footer title="Contact" description="Check out my portfolio here!" />
-      </Grid>
+      </ThemeProvider>
     );
   }
 };

@@ -4,7 +4,10 @@ import ProductList from "./ProductList";
 import { deleteOrderItem, getOrderItems } from "../store/orderItems";
 import { updateOrder } from "../store/orders";
 import { Paper, Typography, Button, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/styles/";
+
+import theme from "../theme";
+
 import Footer from "./Footer";
 
 const useStyles = makeStyles({
@@ -70,7 +73,7 @@ const Cart = ({
     return <h1>Loading...</h1>;
   } else {
     return (
-      <Grid>
+      <ThemeProvider theme={theme}>
         <Paper className={classes.root}>
           <Typography className={classes.center} variant="h4">
             Cart
@@ -86,11 +89,12 @@ const Cart = ({
           <br />
           <br />
           <Grid className={classes.center}>
-            <Button onClick={clearCart} variant="outlined">
+            <Button onClick={clearCart} variant="contained">
               Clear Cart
             </Button>
             <Button
-              variant="outlined"
+              variant="contained"
+              color="primary"
               href="/checkout"
               disabled={!cartOrderItems.length}
             >
@@ -99,7 +103,7 @@ const Cart = ({
           </Grid>
         </Paper>
         <Footer title="Contact" description="Check out my portfolio here!" />
-      </Grid>
+      </ThemeProvider>
     );
   }
 };
