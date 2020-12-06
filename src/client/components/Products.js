@@ -2,36 +2,40 @@ import React from "react";
 import { connect } from "react-redux";
 import { getProducts } from "../store";
 import ProductCard from "./ProductCard.js";
+import { Typography, Grid } from "@material-ui/core/";
+import { makeStyles } from "@material-ui/core/styles";
 
-class Products extends React.Component {
-  constructor() {
-    super();
+const useStyles = makeStyles((theme) => ({
+  center: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "2%",
+  },
+}));
 
-    this.onChange = this.onChange.bind(this);
-  }
+const Products = ({ products }) => {
+  // onChange(ev) {
+  //   this.setState({
+  //     category: ev.target.value,
+  //   });
+  // }
+  const classes = useStyles();
 
-  onChange(ev) {
-    this.setState({
-      category: ev.target.value,
-    });
-  }
-
-  render() {
-    const { products } = this.props;
-
-    return (
-      <div>
-        <div>
-          <ul className="card-wrapper">
-            {products.map((product) => {
-              return <ProductCard key={product.id} {...product} />;
-            })}
-          </ul>
-        </div>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Grid>
+        <Typography variant="h4" className={classes.center}>
+          Products
+        </Typography>
+        <ul className="card-wrapper">
+          {products.map((product) => {
+            return <ProductCard key={product.id} {...product} />;
+          })}
+        </ul>
+      </Grid>
+    </div>
+  );
+};
 
 const mapStateToProps = ({ products, user }) => {
   return { products, user };
