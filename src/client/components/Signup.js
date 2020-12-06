@@ -62,7 +62,7 @@ const SignupForm = (props) => {
     const password = ev.target.password.value;
     const firstName = ev.target.firstName.value;
     const lastName = ev.target.lastName.value;
-    signup(email, password);
+    signup(email, firstName, lastName, password);
     history.push("/");
   }
 
@@ -140,9 +140,9 @@ const SignupForm = (props) => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item xs>
-              <Link href="/auth/google" variant="body2">
+              {/* <Link href="/auth/google" variant="body2">
                 Sign Up with Google
-              </Link>
+              </Link> */}
             </Grid>
             <Grid item>
               <Link href="/login" variant="body2">

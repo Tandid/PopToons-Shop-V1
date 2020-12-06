@@ -99,9 +99,9 @@ const LoginForm = (props) => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="/auth/google" variant="body2">
+              {/* <Link href="/auth/google" variant="body2">
                 Login with Google
-              </Link>
+              </Link> */}
             </Grid>
             <Grid item>
               <Link href="/signup" variant="body2">
