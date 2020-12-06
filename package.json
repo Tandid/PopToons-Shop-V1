@@ -19,6 +19,7 @@
     "connect-session-sequelize": "^7.0.4",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "heroku": "^7.47.4",
     "morgan": "^1.10.0",
     "node": "^15.2.0",
     "nodemon": "^2.0.6",
