@@ -40,13 +40,15 @@ const Orders = ({ fetchOrders, orders, user }) => {
           Order History
         </Typography>
         <br />
-        {orders
-          .filter(
-            (order) => order.userId === user.id && order.status !== "cart"
-          )
-          .map((order) => (
-            <OrderCard key={order.id} {...order} />
-          ))}
+        <Grid>
+          {orders
+            .filter(
+              (order) => order.userId === user.id && order.status !== "cart"
+            )
+            .map((order) => (
+              <OrderCard key={order.id} {...order} />
+            ))}
+        </Grid>
       </Paper>
       <Footer title="Contact" description="Check out my portfolio here!" />
     </Grid>

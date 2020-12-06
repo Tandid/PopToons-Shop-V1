@@ -93,7 +93,11 @@ const Cart = ({
           <br />
           <br />
           <Grid className={classes.center}>
-            <Button onClick={clearCart} variant="contained">
+            <Button
+              disabled={!cartOrderItems.length}
+              onClick={clearCart}
+              variant="contained"
+            >
               Clear Cart
             </Button>
             <Button

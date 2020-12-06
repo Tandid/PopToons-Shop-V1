@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
   center: {
     alignItems: "center",
   },
+  green: { color: "green" },
+  red: { color: "red" },
+  orange: { color: "orange" },
 }));
 
 const OrderCard = ({ id, status, totalPrice, orderItems, products }) => {
@@ -36,11 +39,17 @@ const OrderCard = ({ id, status, totalPrice, orderItems, products }) => {
           id="panel1a-header"
         >
           <Typography variant="h6" className={classes.heading}>
-            ORDER #{id}
+            ORDER #{id}:
           </Typography>
-          <Typography variant="h6" className={classes.heading}>
+          <Typography
+            variant="h6"
+            className={
+              (status === "completed" && classes.green) ||
+              (status === "accepted" && classes.orange)
+            }
+          >
             {" "}
-            : {status.toUpperCase()}
+            {status.toUpperCase()}
           </Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.root}>
