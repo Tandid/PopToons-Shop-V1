@@ -105,7 +105,7 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
         <Toolbar className={classes.nav}>
           <Grid container justify="space-between">
             <Tab
-              className={classes.tab}
+              className={classes.logo}
               label="Funko Pop Shop"
               component={Link}
               to="/"

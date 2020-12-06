@@ -44,11 +44,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-    // objectFit: "contain",
   },
   largePost: {
-    width: "90%",
-    height: theme.spacing(60),
+    objectFit: "contain",
+    width: "95%",
+    height: theme.spacing(17),
     marginBottom: theme.spacing(4),
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -99,8 +99,8 @@ const HomePage = () => {
       <br />
       <Grid container justify="space-around">
         <Paper
-          className={classes.miniPost}
-          style={{ backgroundImage: "url(images/civil_war.jpg)" }}
+          className={classes.largePost}
+          style={{ backgroundImage: "url(images/footer.png)" }}
         />
         <Paper
           className={classes.miniPost}

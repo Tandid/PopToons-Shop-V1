@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 const Products = ({ products }) => {
   const classes = useStyles();
   const [page, setPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(12);
+  const [productsPerPage] = useState(12);
 
   useEffect(() => {}, [page, productsPerPage]);
 
@@ -50,6 +50,15 @@ const Products = ({ products }) => {
               return <ProductCard key={product.id} {...product} />;
             })}
         </ul>
+        <Pagination
+          className={classes.center}
+          count={3}
+          variant="outlined"
+          shape="rounded"
+          onChange={handleChangePage}
+          size="large"
+        />
+        <br />
       </Grid>
     </div>
   );
