@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { removeUser, updateUser, getUsers } from "../store";
+import { removeUser, updateUser } from "../store";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";

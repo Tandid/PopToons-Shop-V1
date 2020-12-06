@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getOrder } from "../store/orders";
 import { Paper, Typography, Button, Grid } from "@material-ui/core";

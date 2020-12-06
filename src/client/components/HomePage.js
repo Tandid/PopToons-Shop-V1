@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 
@@ -104,16 +102,6 @@ const HomePage = () => {
       </AutoPlaySwipeableViews>
       <FeaturedProducts />
       <br />
-      {/* <Grid container justify="space-around">
-        <Paper
-          className={classes.largePost}
-          style={{ backgroundImage: "url(images/footer.png)" }}
-        />
-        <Paper
-          className={classes.miniPostOne}
-          style={{ backgroundImage: "url(images/star_wars.jpg)" }}
-        />
-      </Grid> */}
       <div
         className={classes.footer}
         style={{ backgroundImage: "url(images/streetfighter.jpg)" }}
