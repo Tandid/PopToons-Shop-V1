@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { getProducts } from "../store";
 import ProductCard from "./ProductCard.js";
+import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid } from "@material-ui/core/";
 import Pagination from "@material-ui/lab/Pagination";
 import Footer from "./Footer";
-
-import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   center: {
