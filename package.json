@@ -51,8 +51,7 @@
     "server": "node ./server/index.js ",
     "start-dev": "nodemon ./server/index.js & react-scripts start",
     "dev": "nodemon ./server/index.js",
-    "seed": "node script/seed.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "seed": "node script/seed.js"
   },
   "eslintConfig": {
     "extends": [
