@@ -46,7 +46,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "frontend": "node ./server/index.js & react-scripts start",
+    "start-server": "node ./server/index.js & react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
