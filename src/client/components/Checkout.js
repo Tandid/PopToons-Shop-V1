@@ -79,7 +79,7 @@ const Checkout = ({
       await acceptOrder(
         {
           id: cart.id,
-          status: "accepted",
+          status: "processing",
           firstName: firstName,
           lastName: lastName,
           email: email,

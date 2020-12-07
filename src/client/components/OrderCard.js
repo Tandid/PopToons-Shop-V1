@@ -46,7 +46,7 @@ const OrderCard = ({ id, status, totalPrice, orderItems, products }) => {
               variant="h6"
               className={
                 (status === "completed" && classes.green) ||
-                (status === "accepted" && classes.orange)
+                (status === "processing" && classes.orange)
               }
             >
               {" "}

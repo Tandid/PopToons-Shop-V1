@@ -131,7 +131,7 @@ const OrderListing = ({
                             {column.id === "completeOrder" && (
                               <IconButton
                                 className={classes.green}
-                                disabled={order.status !== "accepted"}
+                                disabled={order.status !== "processing"}
                                 onClick={() =>
                                   updateOrder(
                                     {
@@ -148,7 +148,7 @@ const OrderListing = ({
                             {column.id === "cancelOrder" && (
                               <IconButton
                                 color="primary"
-                                disabled={order.status !== "accepted"}
+                                disabled={order.status !== "processing"}
                                 onClick={() =>
                                   updateOrder(
                                     {
