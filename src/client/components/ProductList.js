@@ -146,11 +146,11 @@ const ProductList = ({
 const mapStateToProps = ({ products, orderItems, orderItem, orders, user }) => {
   const cart = user.id
     ? orders.find(
-        (order) => order.status === "cart" && order.userId === user.id
+        (order) => order.status === "in-cart" && order.userId === user.id
       )
     : orders.find(
         (order) =>
-          order.status === "cart" &&
+          order.status === "in-cart" &&
           order.userId === localStorage.getItem("guestId")
       );
 

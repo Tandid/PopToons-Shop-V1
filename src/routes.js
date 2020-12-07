@@ -63,13 +63,13 @@ class Routes extends Component {
     const { orders, orderItems, user, products } = this.props;
 
     const userCart = await orders.find(
-      (order) => order.userId === user.id && order.status === "cart"
+      (order) => order.userId === user.id && order.status === "in-cart"
     );
 
     const guestCart = await orders.find(
       (order) =>
         order.userId === localStorage.getItem("guestId") &&
-        order.status === "cart"
+        order.status === "in-cart"
     );
 
     const userOrderItems = await orderItems.filter(
