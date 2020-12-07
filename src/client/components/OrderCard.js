@@ -23,6 +23,12 @@ const useStyles = makeStyles((theme) => ({
   green: { color: "green" },
   red: { color: "red" },
   orange: { color: "orange" },
+  orderCard: {
+    transition: "all ease 500ms",
+    "&:hover": {
+      transform: "scale(1.02)",
+    },
+  },
 }));
 
 const OrderCard = ({ id, status, totalPrice, orderItems, products }) => {
@@ -55,43 +61,50 @@ const OrderCard = ({ id, status, totalPrice, orderItems, products }) => {
           </Grid>
         </AccordionSummary>
         <AccordionDetails className={classes.root}>
-          {orderItems
-            .filter((orderItem) => orderItem.orderId === id)
-            .map((orderItem) => (
-              <div>
-                <Grid container justify="space-around" alignItems="center">
-                  <img
-                    className="orderItems"
-                    alt="product img"
-                    src={
-                      products.find(
-                        (product) => product.id === orderItem.productId
-                      ).imageURL
-                    }
-                  />
-                  <Typography variant="body1">
-                    {
-                      products.find(
-                        (product) => product.id === orderItem.productId
-                      ).title
-                    }
-                  </Typography>
-                  <Typography variant="body1">
-                    x {orderItem.quantity}
-                  </Typography>
-                  <Typography variant="body1">
-                    $
-                    {
-                      products.find(
-                        (product) => product.id === orderItem.productId
-                      ).price
-                    }
-                    .00
-                  </Typography>
-                </Grid>
-                <br />
-              </div>
-            ))}
+          <Grid>
+            {orderItems
+              .filter((orderItem) => orderItem.orderId === id)
+              .map((orderItem) => (
+                <div>
+                  <Grid
+                    className={classes.orderCard}
+                    container
+                    justify="space-around"
+                    alignItems="center"
+                  >
+                    <img
+                      className="orderItems"
+                      alt="product img"
+                      src={
+                        products.find(
+                          (product) => product.id === orderItem.productId
+                        ).imageURL
+                      }
+                    />
+                    <Typography variant="body1">
+                      {
+                        products.find(
+                          (product) => product.id === orderItem.productId
+                        ).title
+                      }
+                    </Typography>
+                    <Typography variant="body1">
+                      x {orderItem.quantity}
+                    </Typography>
+                    <Typography variant="body1">
+                      $
+                      {
+                        products.find(
+                          (product) => product.id === orderItem.productId
+                        ).price
+                      }
+                      .00
+                    </Typography>
+                  </Grid>
+                  <br />
+                </div>
+              ))}
+          </Grid>
           <Typography className={classes.center} variant="h6">
             Total Price: ${parseFloat(totalPrice).toFixed(2)}
           </Typography>

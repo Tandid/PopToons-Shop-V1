@@ -22,16 +22,16 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     padding: theme.spacing(1),
     margin: theme.spacing(1),
+    transition: "all ease 500ms",
+    "&:hover": {
+      transform: "scale(1.05)",
+    },
   },
   media: {
     height: 0,
     paddingTop: "80%",
     backgroundSize: "contain",
     backgroundPosition: "center",
-    transition: "all ease 300ms",
-    "&:hover": {
-      transform: "scale(1.05)",
-    },
   },
   backdrop: {
     zIndex: "1",
