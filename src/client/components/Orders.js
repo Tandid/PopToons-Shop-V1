@@ -43,7 +43,7 @@ const Orders = ({ fetchOrders, orders, user }) => {
         <Grid>
           {orders
             .filter(
-              (order) => order.userId === user.id && order.status !== "cart"
+              (order) => order.userId === user.id && order.status !== "in-cart"
             )
             .map((order) => (
               <OrderCard key={order.id} {...order} />

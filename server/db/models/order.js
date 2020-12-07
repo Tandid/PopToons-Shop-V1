@@ -10,7 +10,7 @@ const Order = db.define("order", {
   },
   status: {
     type: Sequelize.STRING,
-    defaultValue: "cart",
+    defaultValue: "in-cart",
   },
   totalPrice: {
     type: Sequelize.DECIMAL,

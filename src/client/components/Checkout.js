@@ -89,7 +89,7 @@ const Checkout = ({
       );
       await createNewCart({
         userId: user.id ? user.id : localStorage.getItem("guestId"),
-        status: "cart",
+        status: "in-cart",
       });
     } catch (exception) {
       console.log(exception);

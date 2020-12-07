@@ -230,7 +230,7 @@ async function seed() {
   const orders = await Promise.all([
     Order.create({
       userId: tandid.id,
-      status: "cart",
+      status: "in-cart",
       totalPrice: parseFloat(b.price) + parseFloat(d.price),
     }),
     Order.create({
