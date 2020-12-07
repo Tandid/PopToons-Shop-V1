@@ -127,6 +127,7 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
                 label="Products"
                 component={Link}
                 to="/products"
+                disableRipple="true"
               />
               {isLoggedIn && (
                 <Tab
@@ -134,6 +135,7 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
                   label="Order History"
                   component={Link}
                   to="/orders"
+                  disableRipple="true"
                 />
               )}
 
@@ -142,6 +144,7 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
                 component={Link}
                 to="/cart"
                 aria-label="cart"
+                disableRipple="true"
               >
                 <StyledBadge
                   badgeContent={cartTotal ? cartTotal : "0"}
@@ -151,6 +154,7 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
                 </StyledBadge>
               </IconButton>
               <Tab
+                disableRipple="true"
                 className={classes.tab}
                 ref={anchorRef}
                 aria-controls={open ? "menu-list-grow" : undefined}

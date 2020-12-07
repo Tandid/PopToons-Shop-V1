@@ -53,7 +53,7 @@ const AddProduct = ({ user, save, history }) => {
   const [description, setDescription] = useState("");
   const [imageURL, setImageURL] = useState("./images/default_image.jpg");
   const [price, setPrice] = useState(0);
-  const [error, setError] = useState("");
+  const [setError] = useState("");
 
   const classes = useStyles();
 

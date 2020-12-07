@@ -38,19 +38,21 @@ const OrderCard = ({ id, status, totalPrice, orderItems, products }) => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography variant="h6" className={classes.heading}>
-            ORDER #{id}:
-          </Typography>
-          <Typography
-            variant="h6"
-            className={
-              (status === "completed" && classes.green) ||
-              (status === "accepted" && classes.orange)
-            }
-          >
-            {" "}
-            {status.toUpperCase()}
-          </Typography>
+          <Grid container justify="space-between">
+            <Typography variant="h6" className={classes.heading}>
+              ORDER #{id}
+            </Typography>
+            <Typography
+              variant="h6"
+              className={
+                (status === "completed" && classes.green) ||
+                (status === "accepted" && classes.orange)
+              }
+            >
+              {" "}
+              {status.toUpperCase()}
+            </Typography>
+          </Grid>
         </AccordionSummary>
         <AccordionDetails className={classes.root}>
           {orderItems

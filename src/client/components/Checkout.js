@@ -1,5 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import ProductList from "./ProductList";
 import { updateOrder, createOrder } from "../store/orders";
@@ -97,11 +96,11 @@ const Checkout = ({
     }
   }
 
-  async function handleChange(ev) {
-    this.setState({
-      [ev.target.name]: ev.target.value,
-    });
-  }
+  // async function handleChange(ev) {
+  //   this.setState({
+  //     [ev.target.name]: ev.target.value,
+  //   });
+  // }
 
   async function handleToken(token) {
     const response = await axios.post("/api/stripe/checkout", {

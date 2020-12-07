@@ -1,12 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { updateOrder } from "../store/orders";
-
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/Button";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
+import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import Typography from "@material-ui/core/Typography";
 import Table from "@material-ui/core/Table";
@@ -16,7 +14,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-
+import theme from "../theme";
 const columns = [
   { id: "id", label: "Order #", minWidth: 150 },
   {
@@ -71,6 +69,9 @@ const useStyles = makeStyles({
   container: {
     maxHeight: 520,
   },
+  green: {
+    color: "green",
+  },
 });
 
 const OrderListing = ({
@@ -95,88 +96,92 @@ const OrderListing = ({
   };
 
   return (
-    <Paper className={classes.root}>
-      <Typography className={classes.center} variant="h4">
-        Manage Orders
-      </Typography>
-      <br />
-      <TableContainer className={classes.container}>
-        <Table Listings>
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {orders
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((order) => {
-                return (
-                  <TableRow hover tabIndex={-1} key={order.id}>
-                    {columns.map((column) => {
-                      const value = order[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {value}
-                          {column.id === "completeOrder" && (
-                            <IconButton
-                              disabled={order.status !== "accepted"}
-                              onClick={() =>
-                                updateOrder(
-                                  {
-                                    id: order.id,
-                                    status: "completed",
-                                  },
-                                  () => {}
-                                )
-                              }
-                            >
-                              <AddCircleIcon />
-                            </IconButton>
-                          )}
-                          {column.id === "cancelOrder" && (
-                            <IconButton
-                              disabled={order.status !== "accepted"}
-                              onClick={() =>
-                                updateOrder(
-                                  {
-                                    id: order.id,
-                                    status: "canceled",
-                                  },
-                                  () => {}
-                                )
-                              }
-                            >
-                              <HighlightOffIcon />
-                            </IconButton>
-                          )}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 15, 20]}
-        component="div"
-        count={orders.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-    </Paper>
+    <ThemeProvider theme={theme}>
+      <Paper className={classes.root}>
+        <Typography className={classes.center} variant="h4">
+          Manage Orders
+        </Typography>
+        <br />
+        <TableContainer className={classes.container}>
+          <Table Listings>
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {orders
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((order) => {
+                  return (
+                    <TableRow hover tabIndex={-1} key={order.id}>
+                      {columns.map((column) => {
+                        const value = order[column.id];
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {value}
+                            {column.id === "completeOrder" && (
+                              <IconButton
+                                className={classes.green}
+                                disabled={order.status !== "accepted"}
+                                onClick={() =>
+                                  updateOrder(
+                                    {
+                                      id: order.id,
+                                      status: "completed",
+                                    },
+                                    () => {}
+                                  )
+                                }
+                              >
+                                <AssignmentTurnedInIcon />
+                              </IconButton>
+                            )}
+                            {column.id === "cancelOrder" && (
+                              <IconButton
+                                color="primary"
+                                disabled={order.status !== "accepted"}
+                                onClick={() =>
+                                  updateOrder(
+                                    {
+                                      id: order.id,
+                                      status: "canceled",
+                                    },
+                                    () => {}
+                                  )
+                                }
+                              >
+                                <HighlightOffIcon />
+                              </IconButton>
+                            )}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 15, 20]}
+          component="div"
+          count={orders.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+      </Paper>
+    </ThemeProvider>
   );
 };
 
