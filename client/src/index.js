@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import history from "./history";
 import store from "./store";
@@ -8,9 +8,9 @@ import App from "./App";
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <HashRouter history={history}>
       <App />
-    </Router>
+    </HashRouter>
   </Provider>,
   document.getElementById("root")
 );
