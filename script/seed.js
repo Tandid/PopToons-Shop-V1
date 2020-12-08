@@ -15,8 +15,7 @@ async function seed() {
       email: "tandid@gmail.com",
       password: "123",
       admin: "true",
-      imageURL:
-        "https://images-na.ssl-images-amazon.com/images/I/41qffCyrPUL._AC_.jpg",
+      imageURL: "images/profilepic.jpg",
     }),
     User.create({
       firstName: "Jim",
@@ -240,17 +239,17 @@ async function seed() {
     Order.create({
       userId: jim.id,
       status: "in-cart",
-      totalPrice: parseFloat(b.price) + parseFloat(d.price),
+      totalPrice: parseFloat(h.price),
     }),
     Order.create({
       userId: tandid.id,
       status: "in-cart",
-      totalPrice: parseFloat(b.price) + parseFloat(d.price),
+      totalPrice: parseFloat(i.price) + parseFloat(j.price),
     }),
     Order.create({
       userId: tandid.id,
       status: "completed",
-      totalPrice: parseFloat(b.price) + parseFloat(d.price),
+      totalPrice: parseFloat(d.price) + parseFloat(g.price),
     }),
   ]);
 
@@ -260,6 +259,10 @@ async function seed() {
     OrderItems.create({ productId: h.id, orderId: activeOrder1.id }),
   ]);
   const order2 = await Promise.all([
+    OrderItems.create({ productId: i.id, orderId: activeOrder2.id }),
+    OrderItems.create({ productId: j.id, orderId: activeOrder2.id }),
+  ]);
+  const order3 = await Promise.all([
     OrderItems.create({ productId: d.id, orderId: completedOrder.id }),
     OrderItems.create({ productId: g.id, orderId: completedOrder.id }),
   ]);
