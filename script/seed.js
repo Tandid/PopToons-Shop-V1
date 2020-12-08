@@ -15,10 +15,19 @@ async function seed() {
       email: "tandid@gmail.com",
       password: "123",
       admin: "true",
+      imageURL:
+        "https://images-na.ssl-images-amazon.com/images/I/41qffCyrPUL._AC_.jpg",
+    }),
+    User.create({
+      firstName: "Jim",
+      lastName: "Halpert",
+      email: "jim@gmail.com",
+      password: "123",
+      admin: "false",
     }),
   ]);
 
-  const [tandid] = users;
+  const [tandid, jim] = users;
 
   //-------PRODUCTS----------------------------------------
 
@@ -229,6 +238,11 @@ async function seed() {
 
   const orders = await Promise.all([
     Order.create({
+      userId: jim.id,
+      status: "in-cart",
+      totalPrice: parseFloat(b.price) + parseFloat(d.price),
+    }),
+    Order.create({
       userId: tandid.id,
       status: "in-cart",
       totalPrice: parseFloat(b.price) + parseFloat(d.price),
@@ -240,14 +254,12 @@ async function seed() {
     }),
   ]);
 
-  const [activeOrder, completedOrder] = orders;
+  const [activeOrder1, activeOrder2, completedOrder] = orders;
 
-  const cart = await Promise.all([
-    OrderItems.create({ productId: c.id, orderId: activeOrder.id }),
-    OrderItems.create({ productId: f.id, orderId: activeOrder.id }),
+  const order1 = await Promise.all([
+    OrderItems.create({ productId: h.id, orderId: activeOrder1.id }),
   ]);
-
-  const cart2 = await Promise.all([
+  const order2 = await Promise.all([
     OrderItems.create({ productId: d.id, orderId: completedOrder.id }),
     OrderItems.create({ productId: g.id, orderId: completedOrder.id }),
   ]);

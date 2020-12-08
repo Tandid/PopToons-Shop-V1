@@ -51,6 +51,22 @@ const LoginForm = (props) => {
     history.push("/");
   }
 
+  function handleDemoUserLogin(ev) {
+    ev.preventDefault();
+    const email = "jim@gmail.com";
+    const password = "123";
+    login(email, password);
+    history.push("/");
+  }
+
+  function handleDemoAdminLogin(ev) {
+    ev.preventDefault();
+    const email = "tandid@gmail.com";
+    const password = "123";
+    login(email, password);
+    history.push("/");
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs" className={classes.paper}>
@@ -60,12 +76,7 @@ const LoginForm = (props) => {
           Sign in
         </Typography>
 
-        <form
-          className={classes.form}
-          onSubmit={handleSubmit}
-          name="login"
-          noValidate
-        >
+        <form className={classes.form} onSubmit={handleSubmit} name="login">
           <TextField
             variant="outlined"
             margin="normal"
@@ -97,6 +108,26 @@ const LoginForm = (props) => {
           >
             Login
           </Button>
+          <Grid container justify="space-evenly">
+            <Button
+              type="submit"
+              onClick={handleDemoUserLogin}
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+            >
+              Demo User Login
+            </Button>
+            <Button
+              type="submit"
+              onClick={handleDemoAdminLogin}
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+            >
+              Demo Admin Login
+            </Button>
+          </Grid>
           <Grid container>
             <Grid item xs>
               {/* <Link href="/auth/google" variant="body2">
