@@ -16,18 +16,17 @@ import {
   OrderListing,
   AddProduct,
   EditProduct,
-} from "./client/components/index";
-import { me, getProducts, getUsers } from "./client/store";
+} from "./components/index";
+import { me, getProducts, getUsers } from "./store";
 import {
   getOrderItems,
   orderItems,
   deleteOrderItem,
   createOrderItem,
   updateOrderItem,
-} from "./client/store/orderItems";
-import { getOrders, createOrder, updateOrder } from "./client/store/orders";
-import { useHistory } from "react-router-dom";
-import { createUser } from "./client/store/user";
+} from "./store/orderItems";
+import { getOrders, createOrder, updateOrder } from "./store/orders";
+import { createUser } from "./store/user";
 import { v4 as uuidv4 } from "uuid";
 
 class Routes extends Component {

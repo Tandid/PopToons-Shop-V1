@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar } from "./client/components/index";
+import { Navbar } from "./components/index";
 import Routes from "./routes";
 
 const App = () => {
