@@ -38,34 +38,13 @@ const useStyles = makeStyles({
   },
 });
 
-const LoginForm = (props) => {
-  const { login, error } = props;
+const LoginForm = ({
+  handleSubmit,
+  handleDemoUserLogin,
+  handleDemoAdminLogin,
+  error,
+}) => {
   const classes = useStyles();
-  const history = useHistory();
-
-  function handleSubmit(ev) {
-    ev.preventDefault();
-    const email = ev.target.email.value;
-    const password = ev.target.password.value;
-    login(email, password);
-    history.push("/");
-  }
-
-  function handleDemoUserLogin(ev) {
-    ev.preventDefault();
-    const email = "jim@gmail.com";
-    const password = "123";
-    login(email, password);
-    history.push("/");
-  }
-
-  function handleDemoAdminLogin(ev) {
-    ev.preventDefault();
-    const email = "tandid@gmail.com";
-    const password = "123";
-    login(email, password);
-    history.push("/");
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -130,9 +109,9 @@ const LoginForm = (props) => {
           </Grid>
           <Grid container>
             <Grid item xs>
-              {/* <Link href="/auth/google" variant="body2">
+              <Link href="/auth/google" variant="body2">
                 Login with Google
-              </Link> */}
+              </Link>
             </Grid>
             <Grid item>
               <Link href="/signup" variant="body2">
@@ -156,7 +135,24 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login(email, password) {
+    handleSubmit(ev) {
+      ev.preventDefault();
+      const email = ev.target.email.value;
+      const password = ev.target.password.value;
+      dispatch(authLogin(email, password));
+    },
+
+    handleDemoUserLogin(ev) {
+      ev.preventDefault();
+      const email = "jim@gmail.com";
+      const password = "123";
+      dispatch(authLogin(email, password));
+    },
+
+    handleDemoAdminLogin(ev) {
+      ev.preventDefault();
+      const email = "tandid@gmail.com";
+      const password = "123";
       dispatch(authLogin(email, password));
     },
   };
