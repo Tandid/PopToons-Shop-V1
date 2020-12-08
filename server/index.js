@@ -13,6 +13,13 @@ module.exports = app;
 
 // if (process.env.NODE_ENV !== 'production') require('../secrets')
 
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+//   app.get("/", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   });
+// }
+
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id));
 
@@ -52,13 +59,23 @@ const createApp = () => {
   app.use("/auth", require("./auth"));
   app.use("/api", require("./api"));
 
-  // static file-serving middleware
-  app.use(express.static(path.join(__dirname, "..", "public")));
+  if (process.env.NODE_ENV === "production") {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, "client/build")));
 
-  // sends index.html
-  app.use("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "client/public/index.html"));
-  });
+    // Handle React routing, return all requests to React app
+    app.get("*", function (req, res) {
+      res.sendFile(path.join(__dirname, "client/build", "index.html"));
+    });
+  } else {
+    // static file-serving middleware
+    app.use(express.static(path.join(__dirname, "..", "public")));
+
+    // sends index.html
+    app.use("*", (req, res) => {
+      res.sendFile(path.join(__dirname, "..", "client/public/index.html"));
+    });
+  }
 
   // error handling endware
   app.use((err, req, res, next) => {
