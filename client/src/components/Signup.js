@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { authSignup } from "../store";
-import { useHistory } from "react-router-dom";
+import Alert from "@material-ui/lab/Alert";
 
 import {
   Avatar,
@@ -111,6 +111,9 @@ const SignupForm = ({ handleSubmit, error }) => {
             </Grid>
             <Grid container item xs={12} />
           </Grid>
+          {error && error.response && (
+            <Alert severity="error">{error.response.data}</Alert>
+          )}
           <Button
             type="submit"
             fullWidth
@@ -122,9 +125,9 @@ const SignupForm = ({ handleSubmit, error }) => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item xs>
-              <Link href="/auth/google" variant="body2">
-                Sign Up with Google
-              </Link>
+              {/* <Link href="/auth/google" variant="body2">
+                Sign up with Google
+              </Link> */}
             </Grid>
             <Grid item>
               <Link href="/login" variant="body2">
@@ -132,7 +135,6 @@ const SignupForm = ({ handleSubmit, error }) => {
               </Link>
             </Grid>
           </Grid>
-          {error && error.response && <div> {error.response.data} </div>}
         </form>
         <Box mt={5} />
       </Container>

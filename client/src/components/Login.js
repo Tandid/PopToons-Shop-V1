@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 import { authLogin } from "../store";
 import {
@@ -16,6 +15,8 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
+import Alert from "@material-ui/lab/Alert";
+
 import theme from "../theme";
 
 const useStyles = makeStyles({
@@ -78,6 +79,9 @@ const LoginForm = ({
             id="password"
             autoComplete="current-password"
           />
+          {error && error.response && (
+            <Alert severity="error"> {error.response.data} </Alert>
+          )}
           <Button
             type="submit"
             fullWidth
@@ -109,9 +113,9 @@ const LoginForm = ({
           </Grid>
           <Grid container>
             <Grid item xs>
-              <Link href="/auth/google" variant="body2">
+              {/* <Link href="/auth/google" variant="body2">
                 Login with Google
-              </Link>
+              </Link> */}
             </Grid>
             <Grid item>
               <Link href="/signup" variant="body2">
@@ -119,7 +123,6 @@ const LoginForm = ({
               </Link>
             </Grid>
           </Grid>
-          {error && error.response && <div> {error.response.data} </div>}
         </form>
         <Box mt={8} />
       </Container>
