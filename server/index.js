@@ -9,17 +9,8 @@ const db = require("./db");
 const sessionStore = new SequelizeStore({ db });
 const PORT = process.env.PORT || 5000;
 const app = express();
-const socketio = require("socket.io");
 module.exports = app;
 
-/**
- * In your development environment, you can keep all of your
- * app's secret API keys in a file called `secrets.js`, in your project
- * root. This file is included in the .gitignore - it will NOT be tracked
- * or show up on Github. On your production server, you can add these
- * keys as environment variables, so that they can still be read by the
- * Node process on process.env
- */
 // if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 // passport registration
@@ -64,17 +55,6 @@ const createApp = () => {
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, "..", "public")));
 
-  // any remaining requests with an extension (.js, .css, etc.) send 404
-  //   app.use((req, res, next) => {
-  //     if (path.extname(req.path).length) {
-  //       const err = new Error("Not found");
-  //       err.status = 404;
-  //       next(err);
-  //     } else {
-  //       next();
-  //     }
-  //   });
-
   // sends index.html
   app.use("*", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "client/public/index.html"));
@@ -93,10 +73,6 @@ const startListening = () => {
   const server = app.listen(PORT, () =>
     console.log(`Mixing it up on port ${PORT}`)
   );
-
-  // set up our socket control center
-  const io = socketio(server);
-  require("./socket")(io);
 };
 
 const syncDb = () => db.sync();
