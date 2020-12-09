@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { authLogin } from "../store";
 import {
@@ -15,9 +16,8 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
-import Alert from "@material-ui/lab/Alert";
-
 import theme from "../theme";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles({
   paper: {
@@ -39,13 +39,34 @@ const useStyles = makeStyles({
   },
 });
 
-const LoginForm = ({
-  handleSubmit,
-  handleDemoUserLogin,
-  handleDemoAdminLogin,
-  error,
-}) => {
+const LoginForm = (props) => {
+  const { login, error } = props;
   const classes = useStyles();
+  const history = useHistory();
+
+  function handleSubmit(ev) {
+    ev.preventDefault();
+    const email = ev.target.email.value;
+    const password = ev.target.password.value;
+    login(email, password);
+    history.push("/");
+  }
+
+  function handleDemoUserLogin(ev) {
+    ev.preventDefault();
+    const email = "jim@gmail.com";
+    const password = "123";
+    login(email, password);
+    history.push("/");
+  }
+
+  function handleDemoAdminLogin(ev) {
+    ev.preventDefault();
+    const email = "tandid@gmail.com";
+    const password = "123";
+    login(email, password);
+    history.push("/");
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -123,6 +144,7 @@ const LoginForm = ({
               </Link>
             </Grid>
           </Grid>
+          {error && error.response && <div> {error.response.data} </div>}
         </form>
         <Box mt={8} />
       </Container>
@@ -138,24 +160,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit(ev) {
-      ev.preventDefault();
-      const email = ev.target.email.value;
-      const password = ev.target.password.value;
-      dispatch(authLogin(email, password));
-    },
-
-    handleDemoUserLogin(ev) {
-      ev.preventDefault();
-      const email = "jim@gmail.com";
-      const password = "123";
-      dispatch(authLogin(email, password));
-    },
-
-    handleDemoAdminLogin(ev) {
-      ev.preventDefault();
-      const email = "tandid@gmail.com";
-      const password = "123";
+    login(email, password) {
       dispatch(authLogin(email, password));
     },
   };

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { authSignup } from "../store";
-import Alert from "@material-ui/lab/Alert";
+import { useHistory } from "react-router-dom";
 
 import {
   Avatar,
@@ -17,6 +17,7 @@ import {
 } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "../theme";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles({
   gradient: {
@@ -45,8 +46,26 @@ const useStyles = makeStyles({
   },
 });
 
-const SignupForm = ({ handleSubmit, error }) => {
+const SignupForm = (props) => {
   const classes = useStyles();
+  const { signup, error } = props;
+  const history = useHistory();
+
+  const [value, setValue] = useState(null);
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  function handleSubmit(ev) {
+    ev.preventDefault();
+    const email = ev.target.email.value;
+    const password = ev.target.password.value;
+    const firstName = ev.target.firstName.value;
+    const lastName = ev.target.lastName.value;
+    signup(email, firstName, lastName, password);
+    history.push("/");
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -112,7 +131,7 @@ const SignupForm = ({ handleSubmit, error }) => {
             <Grid container item xs={12} />
           </Grid>
           {error && error.response && (
-            <Alert severity="error">{error.response.data}</Alert>
+            <Alert severity="error"> {error.response.data} </Alert>
           )}
           <Button
             type="submit"
@@ -126,7 +145,7 @@ const SignupForm = ({ handleSubmit, error }) => {
           <Grid container justify="flex-end">
             <Grid item xs>
               {/* <Link href="/auth/google" variant="body2">
-                Sign up with Google
+                Sign Up with Google
               </Link> */}
             </Grid>
             <Grid item>
@@ -135,6 +154,7 @@ const SignupForm = ({ handleSubmit, error }) => {
               </Link>
             </Grid>
           </Grid>
+          {error && error.response && <div> {error.response.data} </div>}
         </form>
         <Box mt={5} />
       </Container>
@@ -150,12 +170,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit(ev) {
-      ev.preventDefault();
-      const email = ev.target.email.value;
-      const password = ev.target.password.value;
-      const firstName = ev.target.firstName.value;
-      const lastName = ev.target.lastName.value;
+    signup(email, password, firstName, lastName) {
       dispatch(authSignup(email, password, firstName, lastName));
     },
   };

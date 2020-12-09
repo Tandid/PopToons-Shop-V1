@@ -20,7 +20,6 @@ import {
 import { me, getProducts, getUsers } from "./store";
 import {
   getOrderItems,
-  orderItems,
   deleteOrderItem,
   createOrderItem,
   updateOrderItem,
@@ -30,10 +29,6 @@ import { createUser } from "./store/user";
 import { v4 as uuidv4 } from "uuid";
 
 class Routes extends Component {
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     this.props.loadInitialData();
   }
@@ -134,7 +129,7 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    const { user } = this.props;
+    const { history } = this.props;
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -157,9 +152,6 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
           </Switch>
         )}
-        {/* {user.admin == true && <Switch />} */}
-        {/* Displays our Login component as a fallback */}
-        {/* <Route component={Login} /> */}
       </Switch>
     );
   }
