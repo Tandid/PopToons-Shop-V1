@@ -46,26 +46,8 @@ const useStyles = makeStyles({
   },
 });
 
-const SignupForm = (props) => {
+const SignupForm = ({ handleSubmit, error }) => {
   const classes = useStyles();
-  const { signup, error } = props;
-  const history = useHistory();
-
-  const [value, setValue] = useState(null);
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  function handleSubmit(ev) {
-    ev.preventDefault();
-    const email = ev.target.email.value;
-    const password = ev.target.password.value;
-    const firstName = ev.target.firstName.value;
-    const lastName = ev.target.lastName.value;
-    signup(email, firstName, lastName, password);
-    history.push("/");
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -169,7 +151,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signup(email, password, firstName, lastName) {
+    handleSubmit(ev) {
+      ev.preventDefault();
+      const email = ev.target.email.value;
+      const password = ev.target.password.value;
+      const firstName = ev.target.firstName.value;
+      const lastName = ev.target.lastName.value;
       dispatch(authSignup(email, password, firstName, lastName));
     },
   };

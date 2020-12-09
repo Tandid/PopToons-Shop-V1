@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+<br/>
+[](https://funkopop-shop.herokuapp.com/) is an E-commerce site that sells pop vinyl figurines also known as Funko Pops. This E-commerce site offers a wide selection of Funko Pops from popular films, videogames, sitcoms, and anime series and include some of my favorite characters. In the site users are able to purchase products, go through a checkout system, view their order history, and if they have admin access, they are able to add/edit products, orders, and user data.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**DISCLAIMER** This site was built as a project solely for educational purposes and doesn't sell actual goods or products listed on this site.
 
-## Available Scripts
+<br/>
 
-In the project directory, you can run:
+## What was used?
 
-### `npm start`
+The Pop Shop was implemented using React, Redux, Node, Express, PostgreSQL, Heroku, and Material UI.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Key Features
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Users have the option to sign up for an account, login using Demo Accounts, or shop as guests. As a guest, they are able to merge carts if they want to create an account in the later on.
 
-### `npm test`
+(Insert gif here)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-Users go through a checkout system and can input 42424242424 4/24 4242 as card details in order to fulfill payment. From there, they get an order receipt and can they can view their order history if they have an account.
 
-### `npm run build`
+(Insert gif here)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-Admins have access to more features such as adding/editing products, changing user admin status, and completing or canceling orders.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+(Insert gif here)
