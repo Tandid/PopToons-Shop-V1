@@ -178,7 +178,7 @@ async function seed() {
     Product.create({
       title: "Obito",
       description: "POP! Naruto Shippuden",
-      imageURL: "images/product_images/obito.png",
+      imageURL: "images/product_images/Obito.png",
       price: 15.0,
     }),
     Product.create({
