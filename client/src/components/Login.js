@@ -144,7 +144,6 @@ const LoginForm = (props) => {
               </Link>
             </Grid>
           </Grid>
-          {error && error.response && <div> {error.response.data} </div>}
         </form>
         <Box mt={8} />
       </Container>

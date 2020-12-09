@@ -154,7 +154,6 @@ const SignupForm = (props) => {
               </Link>
             </Grid>
           </Grid>
-          {error && error.response && <div> {error.response.data} </div>}
         </form>
         <Box mt={5} />
       </Container>
