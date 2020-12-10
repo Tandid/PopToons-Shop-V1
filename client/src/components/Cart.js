@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import ProductList from "./ProductList";
 import { deleteOrderItem, getOrderItems } from "../store/orderItems";
 import { updateOrder } from "../store/orders";
-import { Paper, Typography, Button, Grid } from "@material-ui/core";
+import { Paper, Typography, Button, Grid, Backdrop } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/styles/";
+import { Alert } from "@material-ui/lab/";
 
 import theme from "../theme";
 
@@ -74,7 +75,16 @@ const Cart = ({
   }, []);
 
   if (!cart || !orderItems) {
-    return <h1>Loading...</h1>;
+    return (
+      <Backdrop open>
+        <Alert severity="error">
+          {/* <Typography> */}
+          Error with localStorage. Please Go to Chrome Developer Tools (Right
+          Click -> Inspect ) >> Go to the Application Tab on the top >> Clear
+          storage >> Click the Clear site data, then refresh the page
+        </Alert>
+      </Backdrop>
+    );
   } else {
     return (
       <ThemeProvider theme={theme}>
@@ -127,9 +137,9 @@ const mapStateToProps = ({ orders, orderItems, user, products }) => {
           order.userId === localStorage.getItem("guestId")
       );
 
-  const cartOrderItems = orderItems.filter(
-    (orderItem) => orderItem.orderId === cart.id
-  );
+  const cartOrderItems = cart
+    ? orderItems.filter((orderItem) => orderItem.orderId === cart.id)
+    : 0;
   return {
     orderItems,
     user,

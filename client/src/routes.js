@@ -44,8 +44,8 @@ class Routes extends Component {
   }
 
   async createGuestUser() {
-    const guestId = await uuidv4();
-    await localStorage.setItem("guestId", guestId);
+    const guestId = uuidv4();
+    localStorage.setItem("guestId", guestId);
     await this.props.createUser({ id: guestId });
     await this.props.createGuestCart({ userId: guestId });
   }
@@ -70,9 +70,9 @@ class Routes extends Component {
       (orderItem) => orderItem.orderId === userCart.id
     );
 
-    const guestOrderItems = await orderItems.filter(
-      (orderItem) => orderItem.orderId === guestCart.id
-    );
+    const guestOrderItems = guestCart
+      ? orderItems.filter((orderItem) => orderItem.orderId === guestCart.id)
+      : 0;
 
     let guestOrderItemsPrice = 0;
     await guestOrderItems.forEach((guestOrderItem) => {
@@ -129,7 +129,6 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    const { history } = this.props;
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
