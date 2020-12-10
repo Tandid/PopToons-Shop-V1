@@ -121,10 +121,10 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
             >
               <img className="logo" src="images/logo.png" alt="logo" />
             </Link>
-            <Grid className={classes.root} justify="space-around">
+            <Grid className={classes.root} justify="space-evenly">
               <Tab
                 className={classes.tab}
-                label="Products"
+                label="Shop Now"
                 component={Link}
                 to="/products"
                 disableRipple="true"

@@ -24,7 +24,7 @@ const FeaturedProducts = ({ products }) => {
   return (
     <Grid>
       <Typography variant="h4" className={classes.center}>
-        Featured Products
+        Featured Collection
       </Typography>
       <br />
       {/* <Grid container justify="space-evenly">
