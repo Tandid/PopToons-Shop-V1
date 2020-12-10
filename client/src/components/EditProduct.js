@@ -57,7 +57,6 @@ const EditProduct = ({ product, history, update, match, getProduct }) => {
     product.imageURL ? product.imageURL : ""
   );
   const [price, setPrice] = useState(product.price ? product.price : 0);
-  const [error, setError] = useState("");
 
   const classes = useStyles();
 

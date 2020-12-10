@@ -1,15 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { createProduct } from "../store/product";
 
-import {
-  Backdrop,
-  Grid,
-  Button,
-  Typography,
-  TextField,
-  Paper,
-} from "@material-ui/core/";
+import { Grid, Typography, Paper } from "@material-ui/core/";
 import { ThemeProvider, makeStyles } from "@material-ui/styles/";
 import theme from "../theme";
 

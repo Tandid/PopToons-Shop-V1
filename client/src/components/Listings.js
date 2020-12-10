@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { getProducts, removeProduct } from "../store";
+import { removeProduct } from "../store";
 
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/Button";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import Typography from "@material-ui/core/Typography";
 import Table from "@material-ui/core/Table";
@@ -16,8 +15,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import AddProduct from "./AddProduct";
-import EditProduct from "./EditProduct";
 import EditIcon from "@material-ui/icons/Edit";
 import theme from "../theme";
 const columns = [
