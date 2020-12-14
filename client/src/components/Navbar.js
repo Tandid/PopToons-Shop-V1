@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Tab from "@material-ui/core/Tab";
 import { ThemeProvider } from "@material-ui/styles";
@@ -51,9 +50,6 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     fontWeight: "bold",
     transition: "all ease 300ms",
-    "&:hover": {
-      transform: "scale(1.10)",
-    },
   },
 }));
 
@@ -113,14 +109,20 @@ const Navbar = ({ handleClick, isLoggedIn, cartOrderItems, user }) => {
       <AppBar position="static">
         <Toolbar className={classes.nav}>
           <Grid container justify="space-between">
-            <Link
-              className={classes.logo}
-              // label="Funko Pop Shop"
-              // component={Link}
-              to="/"
-            >
-              <img className="logo" src="images/logo.png" alt="logo" />
-            </Link>
+            <Grid alignContent="flex-start" align>
+              <Grid container>
+                <Link className={classes.logo} to="/">
+                  <img className="logo" src="images/logo.png" alt="logo" />
+                </Link>
+                <Tab
+                  className={classes.tab}
+                  label="Pop Toons Shop"
+                  disableRipple="true"
+                  component={Link}
+                  to="/"
+                />
+              </Grid>
+            </Grid>
             <Grid className={classes.root} justify="space-evenly">
               <Tab
                 className={classes.tab}
