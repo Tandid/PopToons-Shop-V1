@@ -16,6 +16,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "lightgrey",
     padding: theme.spacing(6, 0),
   },
+  black: {
+    color: "black",
+  },
+  steelblue: {
+    color: "steelblue",
+  },
 }));
 
 export default function Footer(props) {
@@ -41,10 +47,15 @@ export default function Footer(props) {
             <IconButton
               component={Link}
               href="https://www.linkedin.com/in/tandidalam/"
+              className={classes.steelblue}
             >
               <LinkedInIcon />
             </IconButton>
-            <IconButton component={Link} href="https://github.com/Tandid">
+            <IconButton
+              component={Link}
+              href="https://github.com/Tandid"
+              className={classes.black}
+            >
               <GitHubIcon />
             </IconButton>
           </Grid>
