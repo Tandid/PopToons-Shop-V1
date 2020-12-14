@@ -1,5 +1,5 @@
 <img align="left" src="https://github.com/Tandid/poptoons-shop/blob/main/client/public/images/logo.png" width=150px>
-https://poptoons-shop.herokuapp.com/ is an E-commerce site that sells pop vinyl figurines also known as Funko Pops. This E-commerce site offers a wide selection of Funko Pops from popular films, videogames, sitcoms, and anime series and include some of my favorite characters. In the site users are able to purchase products, go through a checkout system, view their order history, and if they have admin access, they are able to add/edit products, orders, and user data.
+https://poptoons-shop.herokuapp.com/ is an E-commerce site that sells pop vinyl figurines also known as Funko Pops. This E-commerce site offers a wide selection of Funko Pops from popular films, videogames, sitcoms, and anime series. In the site users are able to purchase products, go through a checkout system, view their order history, and if they have admin access, they're able to add/edit products, orders, and user data.
 
 <br/>
 
