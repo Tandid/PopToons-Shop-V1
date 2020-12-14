@@ -9,7 +9,7 @@ The Pop Shop was implemented using React, Redux, Node, Express, PostgreSQL, Hero
 
 ## Key Features
 
-- Users have the option to sign up for an account, login using Demo Accounts, or shop as guests. As a guest, they are able to merge carts if they want to create an account in the later on.
+- Users have the option to sign up for an account, login using Demo Accounts, or shop as guests. As a guest, they are able to merge carts if they want to create an account later on.
 
 
 ![Demo 1](https://github.com/Tandid/poptoons-shop/blob/main/client/public/images/poptoons1.gif)
