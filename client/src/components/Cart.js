@@ -78,10 +78,24 @@ const Cart = ({
     return (
       <Backdrop open>
         <Alert severity="error">
-          {/* <Typography> */}
-          Error with localStorage. Please Go to Chrome Developer Tools (Right
-          Click -> Inspect ) >> Go to the Application Tab on the top >> Clear
-          storage >> Click the Clear site data, then refresh the page
+          <Typography className={classes.center} variant="h5">
+            Error with localStorage. Please follow the steps below:
+          </Typography>
+          <Typography className={classes.center} variant="h6">
+            1. Open up Chrome Developer Tools (Right Click >> Inspect)
+          </Typography>
+          <Typography className={classes.center} variant="h6">
+            2. Go to the Application Tab
+          </Typography>
+          <Typography className={classes.center} variant="h6">
+            3. Select Clear Storage
+          </Typography>
+          <Typography className={classes.center} variant="h6">
+            4. Click Clear Site Data
+          </Typography>
+          <Typography className={classes.center} variant="h6">
+            5. Refresh Page
+          </Typography>
         </Alert>
       </Backdrop>
     );
