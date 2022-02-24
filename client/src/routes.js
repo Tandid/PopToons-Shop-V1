@@ -130,28 +130,30 @@ class Routes extends Component {
   render() {
     const { isLoggedIn } = this.props;
     return (
-      <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route exact path="/" component={HomePage} />
-        <Route path="/login" component={LoginForm} />
-        <Route path="/signup" component={SignupForm} />
-        <Route exact path="/products" component={Products} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/orders" component={Orders} />
-        <Route path="/checkout" component={Checkout} />
-        <Route path="/confirmation/:id" component={Confirmation} />
-        {isLoggedIn && (
-          <Switch>
-            <Route exact path="/account" component={Account} />
-            <Route exact path="/listings" component={Listings} />
-            <Route exact path="/userlist" component={UserList} />
-            <Route exact path="/orderlist" component={OrderListing} />
-            <Route exact path="/products/:id/edit" component={EditProduct} />
-            <Route exact path="/newProduct" component={AddProduct} />
-            {/* Routes placed here are only available after logging in */}
-          </Switch>
-        )}
-      </Switch>
+      <div className="container-main">
+        <Switch>
+          {/* Routes placed here are available to all visitors */}
+          <Route exact path="/" component={HomePage} />
+          <Route path="/login" component={LoginForm} />
+          <Route path="/signup" component={SignupForm} />
+          <Route exact path="/products" component={Products} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/orders" component={Orders} />
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/confirmation/:id" component={Confirmation} />
+          {isLoggedIn && (
+            <Switch>
+              <Route exact path="/account" component={Account} />
+              <Route exact path="/listings" component={Listings} />
+              <Route exact path="/userlist" component={UserList} />
+              <Route exact path="/orderlist" component={OrderListing} />
+              <Route exact path="/products/:id/edit" component={EditProduct} />
+              <Route exact path="/newProduct" component={AddProduct} />
+              {/* Routes placed here are only available after logging in */}
+            </Switch>
+          )}
+        </Switch>
+      </div>
     );
   }
 }
